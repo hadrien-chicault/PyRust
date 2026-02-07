@@ -1,0 +1,29 @@
+[package]
+name = "pyrust"
+version = "0.1.0"
+edition = "2021"
+authors = ["PyRust Contributors"]
+description = "A Rust-based implementation of PySpark for high-performance distributed computing"
+license = "Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/yourusername/pyrust"
+
+[lib]
+name = "pyrust"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.20", features = ["extension-module"] }
+datafusion = "43.0"
+arrow = "53.3"
+arrow-schema = "53.3"
+tokio = { version = "1", features = ["full"] }
+anyhow = "1.0"
+
+[build-dependencies]
+pyo3-build-config = "0.20"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
