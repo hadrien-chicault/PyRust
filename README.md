@@ -23,7 +23,7 @@ PyRust reimagines PySpark's execution engine in Rust, delivering superior perfor
 
 **Prerequisites:**
 - Python 3.8 or higher
-- Rust 1.70 or higher (for building from source)
+- Rust 1.70 or higher  (for building from source)
 
 **Install from source:**
 
