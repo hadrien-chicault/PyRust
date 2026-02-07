@@ -5,36 +5,97 @@ build/
 dist/
 wheels/
 *.egg-info
+*.egg
 
 # Virtual environments
 .venv
 venv/
 ENV/
+env/
+.python-version
 
 # Rust build artifacts
 target/
 Cargo.lock
 **/*.rs.bk
+*.pdb
 
 # C extensions
 *.so
+*.dylib
+*.dll
 
 # Test files
 .pytest_cache/
 .coverage
+.coverage.*
 htmlcov/
+.tox/
+.hypothesis/
+coverage.xml
+*.cover
+
+# Benchmarks
+.benchmarks/
+benchmark_results/
+
+# Type checking
+.mypy_cache/
+.pytype/
+.pyre/
+.dmypy.json
+
+# Linting
+.ruff_cache/
 
 # IDEs
 .idea/
 .vscode/
 *.swp
 *.swo
+.vs/
+*.code-workspace
 
 # macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+.directory
 
 # Test data (allow examples)
 *.csv
 *.parquet
 !examples/data/*.csv
 !examples/data/*.parquet
+
+# Logs
+*.log
+logs/
+
+# Documentation builds
+docs/_build/
+docs/.doctrees/
+site/
+
+# CI/CD artifacts
+*.whl
+*.tar.gz
+.artifacts/
+
+# Editor backups
+*.bak
+*.tmp
+*.swp
+*~
+
+# OS generated
+.Spotlight-V100
+.Trashes

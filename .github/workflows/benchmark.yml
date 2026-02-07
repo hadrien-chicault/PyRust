@@ -1,0 +1,51 @@
+name: Performance Benchmarks
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    name: Run Benchmarks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: |
+          uv pip install --system maturin pytest pytest-benchmark pyarrow pandas
+
+      - name: Build PyRust (Release)
+        run: maturin develop --release
+
+      - name: Run benchmarks
+        run: |
+          pytest python/tests/ -v --benchmark-only --benchmark-autosave
+
+      - name: Store benchmark results
+        uses: benchmark-action/github-action-benchmark@v1
+        if: github.event_name != 'pull_request'
+        with:
+          tool: 'pytest'
+          output-file-path: .benchmarks/*/0001_*.json
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: true
