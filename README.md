@@ -234,6 +234,24 @@ PyRust builds upon excellent open-source projects:
 - **Issues**: [GitHub Issues](https://github.com/yourusername/pyrust/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/yourusername/pyrust/discussions)
 
+## 🤖 AI Attribution
+
+Ce projet a été développé en collaboration avec Claude (Anthropic AI).
+
+### Contributions par Claude:
+- Architecture initiale du système
+- Implémentation du moteur distribué en Rust
+- Bindings PyO3 pour compatibilité Python
+- Documentation et tests
+
+### Contributions par Hadrien Chicault:
+- Direction du projet et spécifications
+- Validation et tests d'intégration
+- Déploiement et maintenance
+
+### Philosophie
+Nous croyons en la transparence concernant l'utilisation de l'IA dans le développement logiciel.
+Claude a écrit le code, et nous attribuons le crédit de manière appropriée.
 ---
 
 **Note**: PyRust is currently in POC (Proof of Concept) stage. While functional for basic operations, it's not yet production-ready. Use for experimentation and benchmarking.
