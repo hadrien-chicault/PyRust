@@ -25,17 +25,14 @@ jobs:
       - name: Cache Rust dependencies
         uses: Swatinem/rust-cache@v2
 
-      - name: Install uv
-        run: |
-          curl -LsSf https://astral.sh/uv/install.sh | sh
-          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-
       - name: Install dependencies
         run: |
-          uv pip install --system maturin pytest pytest-benchmark pyarrow pandas
+          pip install maturin pytest pytest-benchmark pyarrow pandas
 
       - name: Build PyRust (Release)
-        run: maturin develop --release
+        run: |
+          maturin build --release --out dist
+          pip install dist/*.whl
 
       - name: Run benchmarks
         run: |

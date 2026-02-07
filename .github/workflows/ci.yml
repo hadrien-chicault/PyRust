@@ -100,15 +100,15 @@ jobs:
           echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
       - name: Install maturin
-        run: uv pip install --system maturin
+        run: pip install maturin
 
-      - name: Build PyRust
-        run: maturin build --release
+      - name: Build PyRust wheel
+        run: maturin build --release --out dist
 
       - name: Install PyRust and test dependencies
         run: |
-          uv pip install --system target/wheels/*.whl
-          uv pip install --system pytest pytest-benchmark pyarrow
+          pip install dist/*.whl
+          pip install pytest pytest-benchmark pyarrow
 
       - name: Run tests
         run: pytest python/tests/ -v --tb=short
@@ -195,18 +195,14 @@ jobs:
       - name: Cache Rust dependencies
         uses: Swatinem/rust-cache@v2
 
-      - name: Install uv
-        run: |
-          curl -LsSf https://astral.sh/uv/install.sh | sh
-          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-
       - name: Install dependencies
         run: |
-          uv pip install --system maturin pytest pytest-cov pyarrow
+          pip install maturin pytest pytest-cov pyarrow
 
       - name: Build and install PyRust
         run: |
-          maturin develop
+          maturin build --release --out dist
+          pip install dist/*.whl
 
       - name: Run tests with coverage
         run: |
