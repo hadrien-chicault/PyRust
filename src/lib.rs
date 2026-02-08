@@ -1,11 +1,14 @@
+// Allow non-local definitions for PyO3 macros
+#![allow(non_local_definitions)]
+
 use pyo3::prelude::*;
 
-mod session;
 mod dataframe;
+mod session;
 mod utils;
 
-use session::{PySparkSession, PySparkSessionBuilder, PyDataFrameReader};
 use dataframe::{PyDataFrame, PyGroupedData};
+use session::{PyDataFrameReader, PySparkSession, PySparkSessionBuilder};
 
 /// PyRust - A Rust-based implementation of PySpark
 #[pymodule]

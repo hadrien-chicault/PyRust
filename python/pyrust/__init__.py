@@ -9,8 +9,8 @@ __version__ = "0.1.0"
 
 # Import the compiled Rust module
 try:
-    from pyrust._pyrust import SparkSession as _RustSparkSession
     from pyrust._pyrust import DataFrame as _RustDataFrame
+    from pyrust._pyrust import SparkSession as _RustSparkSession
 except ImportError as e:
     raise ImportError(
         "Failed to import PyRust native module. "
@@ -18,9 +18,9 @@ except ImportError as e:
     ) from e
 
 # Re-export main classes
-from .session import SparkSession
-from .dataframe import DataFrame
 from .column import Column
+from .dataframe import DataFrame
+from .session import SparkSession
 
 __all__ = [
     "SparkSession",

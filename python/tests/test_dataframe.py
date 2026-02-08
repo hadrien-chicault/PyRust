@@ -2,12 +2,13 @@
 Unit tests for PyRust DataFrame operations.
 """
 
-import pytest
 import os
 import sys
 
+import pytest
+
 # Add parent directory to path for imports
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from pyrust import SparkSession
 
@@ -15,9 +16,7 @@ from pyrust import SparkSession
 @pytest.fixture
 def spark():
     """Create a SparkSession for testing."""
-    session = SparkSession.builder \
-        .appName("PyRust Tests") \
-        .getOrCreate()
+    session = SparkSession.builder.appName("PyRust Tests").getOrCreate()
     yield session
     session.stop()
 
@@ -37,18 +36,13 @@ class TestSparkSession:
 
     def test_create_session(self):
         """Test creating a SparkSession."""
-        spark = SparkSession.builder \
-            .appName("Test") \
-            .getOrCreate()
+        spark = SparkSession.builder.appName("Test").getOrCreate()
         assert spark is not None
         spark.stop()
 
     def test_session_with_master(self):
         """Test creating a SparkSession with master URL."""
-        spark = SparkSession.builder \
-            .appName("Test") \
-            .master("local[*]") \
-            .getOrCreate()
+        spark = SparkSession.builder.appName("Test").master("local[*]").getOrCreate()
         assert spark is not None
         spark.stop()
 
@@ -125,10 +119,7 @@ class TestDataFrameOperations:
 
     def test_chaining(self, sample_df):
         """Test chaining multiple operations."""
-        df = sample_df \
-            .filter("age > 26") \
-            .select("name", "city") \
-            .limit(5)
+        df = sample_df.filter("age > 26").select("name", "city").limit(5)
         count = df.count()
         assert count <= 5
 
@@ -152,10 +143,7 @@ class TestGroupedData:
 
     def test_groupby_multiple_aggs(self, sample_df):
         """Test grouping with multiple aggregations."""
-        df = sample_df.groupBy("city").agg(
-            ("age", "avg"),
-            ("salary", "sum")
-        )
+        df = sample_df.groupBy("city").agg(("age", "avg"), ("salary", "sum"))
         assert df is not None
         count = df.count()
         assert count > 0

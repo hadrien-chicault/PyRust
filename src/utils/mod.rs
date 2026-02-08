@@ -4,6 +4,7 @@
 use pyo3::prelude::*;
 
 /// Convert Python object to Rust string
+#[allow(dead_code)]
 pub fn pyobject_to_string(obj: &PyObject, py: Python) -> PyResult<String> {
     obj.extract::<String>(py)
 }

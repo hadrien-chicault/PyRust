@@ -1,6 +1,6 @@
-use pyo3::prelude::*;
-use pyo3::exceptions::PyRuntimeError;
 use datafusion::prelude::*;
+use pyo3::exceptions::PyRuntimeError;
+use pyo3::prelude::*;
 use std::sync::Arc;
 
 use crate::dataframe::PyDataFrame;
@@ -30,6 +30,7 @@ impl PySparkSessionBuilder {
     }
 
     /// Set application name
+    #[allow(non_snake_case)]
     fn appName(&mut self, name: &str) -> Self {
         self.app_name = Some(name.to_string());
         Self {
@@ -48,14 +49,15 @@ impl PySparkSessionBuilder {
     }
 
     /// Create or get SparkSession
+    #[allow(non_snake_case)]
     fn getOrCreate(&self) -> PyResult<PySparkSession> {
         let ctx = SessionContext::new();
-        let app_name = self.app_name.clone().unwrap_or_else(|| "pyrust-app".to_string());
+        let app_name = self
+            .app_name
+            .clone()
+            .unwrap_or_else(|| "pyrust-app".to_string());
 
-        Ok(PySparkSession {
-            ctx,
-            app_name,
-        })
+        Ok(PySparkSession { ctx, app_name })
     }
 }
 
@@ -76,16 +78,17 @@ impl PyDataFrameReader {
         let rt = tokio::runtime::Runtime::new()
             .map_err(|e| PyRuntimeError::new_err(format!("Failed to create runtime: {}", e)))?;
 
-        let df = rt.block_on(async {
-            ctx.read_csv(
-                path,
-                datafusion::prelude::CsvReadOptions::new()
-                    .has_header(header)
-                    .schema_infer_max_records(if infer_schema { 1000 } else { 0 }),
-            )
-            .await
-        })
-        .map_err(|e| PyRuntimeError::new_err(format!("Failed to read CSV: {}", e)))?;
+        let df = rt
+            .block_on(async {
+                ctx.read_csv(
+                    path,
+                    datafusion::prelude::CsvReadOptions::new()
+                        .has_header(header)
+                        .schema_infer_max_records(if infer_schema { 1000 } else { 0 }),
+                )
+                .await
+            })
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to read CSV: {}", e)))?;
 
         Ok(PyDataFrame::new(df))
     }
@@ -97,11 +100,12 @@ impl PyDataFrameReader {
         let rt = tokio::runtime::Runtime::new()
             .map_err(|e| PyRuntimeError::new_err(format!("Failed to create runtime: {}", e)))?;
 
-        let df = rt.block_on(async {
-            ctx.read_parquet(path, datafusion::prelude::ParquetReadOptions::default())
-                .await
-        })
-        .map_err(|e| PyRuntimeError::new_err(format!("Failed to read Parquet: {}", e)))?;
+        let df = rt
+            .block_on(async {
+                ctx.read_parquet(path, datafusion::prelude::ParquetReadOptions::default())
+                    .await
+            })
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to read Parquet: {}", e)))?;
 
         Ok(PyDataFrame::new(df))
     }
@@ -125,13 +129,17 @@ impl PySparkSession {
 
     /// Get application name
     #[getter]
+    #[allow(non_snake_case)]
     fn appName(&self) -> String {
         self.app_name.clone()
     }
 
     /// Create DataFrame from data (placeholder for now)
+    #[allow(non_snake_case)]
     fn createDataFrame(&self, _data: Vec<Vec<PyObject>>) -> PyResult<PyDataFrame> {
-        Err(PyRuntimeError::new_err("createDataFrame not yet implemented in POC"))
+        Err(PyRuntimeError::new_err(
+            "createDataFrame not yet implemented in POC",
+        ))
     }
 
     /// Stop the session

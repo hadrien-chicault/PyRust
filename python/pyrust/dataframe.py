@@ -2,7 +2,6 @@
 DataFrame implementation - Python wrapper around Rust backend.
 """
 
-from typing import List, Union
 
 
 class DataFrame:

@@ -54,6 +54,7 @@ class SparkSessionBuilder:
 
     def __init__(self):
         from pyrust._pyrust import SparkSessionBuilder as _RustBuilder
+
         self._rust_builder = _RustBuilder()
 
     def appName(self, name: str) -> "SparkSessionBuilder":
@@ -108,6 +109,7 @@ class DataFrameReader:
             The loaded DataFrame
         """
         from .dataframe import DataFrame
+
         rust_df = self._rust_reader.csv(path, header=header, infer_schema=inferSchema)
         return DataFrame(rust_df)
 
@@ -126,5 +128,6 @@ class DataFrameReader:
             The loaded DataFrame
         """
         from .dataframe import DataFrame
+
         rust_df = self._rust_reader.parquet(path)
         return DataFrame(rust_df)

@@ -1,8 +1,8 @@
-use pyo3::prelude::*;
-use pyo3::exceptions::PyRuntimeError;
-use datafusion::prelude::*;
 use datafusion::arrow::util::pretty;
-use datafusion::functions_aggregate::expr_fn::{count, sum, avg, min, max};
+use datafusion::functions_aggregate::expr_fn::{avg, count, max, min, sum};
+use datafusion::prelude::*;
+use pyo3::exceptions::PyRuntimeError;
+use pyo3::prelude::*;
 use std::sync::Arc;
 
 /// DataFrame Rust implementation wrapping DataFusion DataFrame
@@ -14,9 +14,7 @@ pub struct PyDataFrame {
 
 impl PyDataFrame {
     pub fn new(df: DataFrame) -> Self {
-        Self {
-            df: Arc::new(df),
-        }
+        Self { df: Arc::new(df) }
     }
 
     fn runtime() -> PyResult<tokio::runtime::Runtime> {
@@ -35,14 +33,13 @@ impl PyDataFrame {
     fn select(&self, cols: Vec<&str>) -> PyResult<Self> {
         let rt = Self::runtime()?;
 
-        let df = rt.block_on(async {
-            let col_exprs: Vec<Expr> = cols.iter()
-                .map(|c| col(*c))
-                .collect();
+        let df = rt
+            .block_on(async {
+                let col_exprs: Vec<Expr> = cols.iter().map(|c| col(*c)).collect();
 
-            self.clone_df().select(col_exprs)
-        })
-        .map_err(|e| PyRuntimeError::new_err(format!("Failed to select columns: {}", e)))?;
+                self.clone_df().select(col_exprs)
+            })
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to select columns: {}", e)))?;
 
         Ok(PyDataFrame::new(df))
     }
@@ -58,65 +55,77 @@ impl PyDataFrame {
     fn where_(&self, condition: &str) -> PyResult<Self> {
         let rt = Self::runtime()?;
 
-        let df = rt.block_on(async {
-            // Parse simple conditions
-            // This is a simplified parser for the POC
-            let parts: Vec<&str> = condition.split_whitespace().collect();
-            if parts.len() != 3 {
-                return Err(datafusion::error::DataFusionError::Plan(
-                    format!("Invalid condition format: {}. Expected format: 'column op value'", condition)
-                ));
-            }
-
-            let col_name = parts[0];
-            let op = parts[1];
-            let value_str = parts[2];
-
-            // Try to parse as number first, then as string
-            let expr = if let Ok(num) = value_str.parse::<i64>() {
-                match op {
-                    ">" => col(col_name).gt(lit(num)),
-                    "<" => col(col_name).lt(lit(num)),
-                    ">=" => col(col_name).gt_eq(lit(num)),
-                    "<=" => col(col_name).lt_eq(lit(num)),
-                    "==" | "=" => col(col_name).eq(lit(num)),
-                    "!=" => col(col_name).not_eq(lit(num)),
-                    _ => return Err(datafusion::error::DataFusionError::Plan(
-                        format!("Unsupported operator: {}", op)
-                    )),
+        let df = rt
+            .block_on(async {
+                // Parse simple conditions
+                // This is a simplified parser for the POC
+                let parts: Vec<&str> = condition.split_whitespace().collect();
+                if parts.len() != 3 {
+                    return Err(datafusion::error::DataFusionError::Plan(format!(
+                        "Invalid condition format: {}. Expected format: 'column op value'",
+                        condition
+                    )));
                 }
-            } else if let Ok(num) = value_str.parse::<f64>() {
-                match op {
-                    ">" => col(col_name).gt(lit(num)),
-                    "<" => col(col_name).lt(lit(num)),
-                    ">=" => col(col_name).gt_eq(lit(num)),
-                    "<=" => col(col_name).lt_eq(lit(num)),
-                    "==" | "=" => col(col_name).eq(lit(num)),
-                    "!=" => col(col_name).not_eq(lit(num)),
-                    _ => return Err(datafusion::error::DataFusionError::Plan(
-                        format!("Unsupported operator: {}", op)
-                    )),
-                }
-            } else {
-                // Treat as string, remove quotes if present
-                let value = value_str.trim_matches('\'').trim_matches('"');
-                match op {
-                    "==" | "=" => col(col_name).eq(lit(value)),
-                    "!=" => col(col_name).not_eq(lit(value)),
-                    _ => return Err(datafusion::error::DataFusionError::Plan(
-                        format!("Unsupported operator for string: {}", op)
-                    )),
-                }
-            };
 
-            self.clone_df().filter(expr)
-        })
-        .map_err(|e| PyRuntimeError::new_err(format!("Failed to filter: {}", e)))?;
+                let col_name = parts[0];
+                let op = parts[1];
+                let value_str = parts[2];
+
+                // Try to parse as number first, then as string
+                let expr = if let Ok(num) = value_str.parse::<i64>() {
+                    match op {
+                        ">" => col(col_name).gt(lit(num)),
+                        "<" => col(col_name).lt(lit(num)),
+                        ">=" => col(col_name).gt_eq(lit(num)),
+                        "<=" => col(col_name).lt_eq(lit(num)),
+                        "==" | "=" => col(col_name).eq(lit(num)),
+                        "!=" => col(col_name).not_eq(lit(num)),
+                        _ => {
+                            return Err(datafusion::error::DataFusionError::Plan(format!(
+                                "Unsupported operator: {}",
+                                op
+                            )))
+                        }
+                    }
+                } else if let Ok(num) = value_str.parse::<f64>() {
+                    match op {
+                        ">" => col(col_name).gt(lit(num)),
+                        "<" => col(col_name).lt(lit(num)),
+                        ">=" => col(col_name).gt_eq(lit(num)),
+                        "<=" => col(col_name).lt_eq(lit(num)),
+                        "==" | "=" => col(col_name).eq(lit(num)),
+                        "!=" => col(col_name).not_eq(lit(num)),
+                        _ => {
+                            return Err(datafusion::error::DataFusionError::Plan(format!(
+                                "Unsupported operator: {}",
+                                op
+                            )))
+                        }
+                    }
+                } else {
+                    // Treat as string, remove quotes if present
+                    let value = value_str.trim_matches('\'').trim_matches('"');
+                    match op {
+                        "==" | "=" => col(col_name).eq(lit(value)),
+                        "!=" => col(col_name).not_eq(lit(value)),
+                        _ => {
+                            return Err(datafusion::error::DataFusionError::Plan(format!(
+                                "Unsupported operator for string: {}",
+                                op
+                            )))
+                        }
+                    }
+                };
+
+                self.clone_df().filter(expr)
+            })
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to filter: {}", e)))?;
 
         Ok(PyDataFrame::new(df))
     }
 
     /// Group by columns
+    #[allow(non_snake_case)]
     fn groupBy(&self, cols: Vec<&str>) -> PyResult<PyGroupedData> {
         let col_exprs: Vec<Expr> = cols.iter().map(|c| col(*c)).collect();
 
@@ -127,6 +136,7 @@ impl PyDataFrame {
     }
 
     /// Order by columns
+    #[allow(non_snake_case)]
     fn orderBy(&self, cols: Vec<&str>) -> PyResult<Self> {
         self.sort(cols)
     }
@@ -135,14 +145,16 @@ impl PyDataFrame {
     fn sort(&self, cols: Vec<&str>) -> PyResult<Self> {
         let rt = Self::runtime()?;
 
-        let df = rt.block_on(async {
-            let sort_exprs = cols.iter()
-                .map(|c| col(*c).sort(true, true))  // ascending, nulls first
-                .collect();
+        let df = rt
+            .block_on(async {
+                let sort_exprs = cols
+                    .iter()
+                    .map(|c| col(*c).sort(true, true)) // ascending, nulls first
+                    .collect();
 
-            self.clone_df().sort(sort_exprs)
-        })
-        .map_err(|e| PyRuntimeError::new_err(format!("Failed to sort: {}", e)))?;
+                self.clone_df().sort(sort_exprs)
+            })
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to sort: {}", e)))?;
 
         Ok(PyDataFrame::new(df))
     }
@@ -151,10 +163,9 @@ impl PyDataFrame {
     fn limit(&self, n: usize) -> PyResult<Self> {
         let rt = Self::runtime()?;
 
-        let df = rt.block_on(async {
-            self.clone_df().limit(0, Some(n))
-        })
-        .map_err(|e| PyRuntimeError::new_err(format!("Failed to limit: {}", e)))?;
+        let df = rt
+            .block_on(async { self.clone_df().limit(0, Some(n)) })
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to limit: {}", e)))?;
 
         Ok(PyDataFrame::new(df))
     }
@@ -163,12 +174,13 @@ impl PyDataFrame {
     fn count(&self) -> PyResult<i64> {
         let rt = Self::runtime()?;
 
-        let count = rt.block_on(async {
-            let batches = self.clone_df().collect().await?;
-            let total: usize = batches.iter().map(|b| b.num_rows()).sum();
-            Ok::<i64, datafusion::error::DataFusionError>(total as i64)
-        })
-        .map_err(|e| PyRuntimeError::new_err(format!("Failed to count: {}", e)))?;
+        let count = rt
+            .block_on(async {
+                let batches = self.clone_df().collect().await?;
+                let total: usize = batches.iter().map(|b| b.num_rows()).sum();
+                Ok::<i64, datafusion::error::DataFusionError>(total as i64)
+            })
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to count: {}", e)))?;
 
         Ok(count)
     }
@@ -206,25 +218,32 @@ impl PyDataFrame {
     }
 
     /// Print schema
+    #[allow(non_snake_case)]
     fn printSchema(&self) -> PyResult<()> {
         let schema = self.df.schema();
         println!("root");
         for field in schema.fields() {
-            println!(" |-- {}: {} (nullable = {})",
-                     field.name(),
-                     field.data_type(),
-                     field.is_nullable());
+            println!(
+                " |-- {}: {} (nullable = {})",
+                field.name(),
+                field.data_type(),
+                field.is_nullable()
+            );
         }
         Ok(())
     }
 
     fn __repr__(&self) -> String {
-        format!("<DataFrame[{}]>",
-                self.df.schema().fields()
-                    .iter()
-                    .map(|f| format!("{}: {}", f.name(), f.data_type()))
-                    .collect::<Vec<_>>()
-                    .join(", "))
+        format!(
+            "<DataFrame[{}]>",
+            self.df
+                .schema()
+                .fields()
+                .iter()
+                .map(|f| format!("{}: {}", f.name(), f.data_type()))
+                .collect::<Vec<_>>()
+                .join(", ")
+        )
     }
 }
 
@@ -241,11 +260,14 @@ impl PyGroupedData {
     fn count(&self) -> PyResult<PyDataFrame> {
         let rt = PyDataFrame::runtime()?;
 
-        let df = rt.block_on(async {
-            self.df.as_ref().clone()
-                .aggregate(self.group_cols.clone(), vec![count(lit(1)).alias("count")])
-        })
-        .map_err(|e| PyRuntimeError::new_err(format!("Failed to aggregate: {}", e)))?;
+        let df = rt
+            .block_on(async {
+                self.df
+                    .as_ref()
+                    .clone()
+                    .aggregate(self.group_cols.clone(), vec![count(lit(1)).alias("count")])
+            })
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to aggregate: {}", e)))?;
 
         Ok(PyDataFrame::new(df))
     }
@@ -254,21 +276,30 @@ impl PyGroupedData {
     fn agg(&self, exprs: Vec<(String, String)>) -> PyResult<PyDataFrame> {
         let rt = PyDataFrame::runtime()?;
 
-        let agg_exprs: Vec<Expr> = exprs.iter().map(|(col_name, func)| {
-            match func.as_str() {
-                "count" => count(col(col_name.as_str())).alias(&format!("count({})", col_name)),
-                "sum" => sum(col(col_name.as_str())).alias(&format!("sum({})", col_name)),
-                "avg" | "mean" => avg(col(col_name.as_str())).alias(&format!("avg({})", col_name)),
-                "min" => min(col(col_name.as_str())).alias(&format!("min({})", col_name)),
-                "max" => max(col(col_name.as_str())).alias(&format!("max({})", col_name)),
-                _ => count(col(col_name.as_str())).alias("count"),  // fallback
-            }
-        }).collect();
+        let agg_exprs: Vec<Expr> = exprs
+            .iter()
+            .map(|(col_name, func)| {
+                match func.as_str() {
+                    "count" => count(col(col_name.as_str())).alias(format!("count({})", col_name)),
+                    "sum" => sum(col(col_name.as_str())).alias(format!("sum({})", col_name)),
+                    "avg" | "mean" => {
+                        avg(col(col_name.as_str())).alias(format!("avg({})", col_name))
+                    }
+                    "min" => min(col(col_name.as_str())).alias(format!("min({})", col_name)),
+                    "max" => max(col(col_name.as_str())).alias(format!("max({})", col_name)),
+                    _ => count(col(col_name.as_str())).alias("count"), // fallback
+                }
+            })
+            .collect();
 
-        let df = rt.block_on(async {
-            self.df.as_ref().clone().aggregate(self.group_cols.clone(), agg_exprs)
-        })
-        .map_err(|e| PyRuntimeError::new_err(format!("Failed to aggregate: {}", e)))?;
+        let df = rt
+            .block_on(async {
+                self.df
+                    .as_ref()
+                    .clone()
+                    .aggregate(self.group_cols.clone(), agg_exprs)
+            })
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to aggregate: {}", e)))?;
 
         Ok(PyDataFrame::new(df))
     }
