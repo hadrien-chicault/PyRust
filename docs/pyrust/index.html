@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="PyRust - High-Performance Distributed Computing"><title>pyrust - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="pyrust" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate pyrust</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../pyrust/index.html">pyrust</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#pyrust---high-performance-distributed-computing" title="PyRust - High-Performance Distributed Computing">PyRust - High-Performance Distributed Computing</a><ul><li><a href="#features" title="Features">Features</a></li><li><a href="#quick-start" title="Quick Start">Quick Start</a></li><li><a href="#architecture" title="Architecture">Architecture</a></li><li><a href="#performance" title="Performance">Performance</a></li></ul></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>pyrust</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/pyrust/lib.rs.html#1-89">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="pyrust---high-performance-distributed-computing"><a class="doc-anchor" href="#pyrust---high-performance-distributed-computing">§</a>PyRust - High-Performance Distributed Computing</h2>
+<p>PyRust is a Rust-based implementation of PySpark, providing high-performance
+distributed computing capabilities with a familiar PySpark-like API.</p>
+<p>Built on top of <a href="https://datafusion.apache.org/">Apache DataFusion</a>, PyRust leverages
+Rust’s performance and safety guarantees to deliver significant speed improvements
+over traditional Python-based data processing frameworks.</p>
+<h3 id="features"><a class="doc-anchor" href="#features">§</a>Features</h3>
+<ul>
+<li><strong>High Performance</strong>: 10-50x faster than PySpark for common operations</li>
+<li><strong>Memory Efficient</strong>: Optimized memory usage with Arrow’s columnar format</li>
+<li><strong>Type Safe</strong>: Leverages Rust’s type system for safer data processing</li>
+<li><strong>Familiar API</strong>: Drop-in replacement for PySpark code</li>
+<li><strong>Zero-Copy</strong>: Efficient data sharing between Python and Rust via PyArrow</li>
+</ul>
+<h3 id="quick-start"><a class="doc-anchor" href="#quick-start">§</a>Quick Start</h3><div class="example-wrap"><pre class="language-python"><code>from pyrust import SparkSession
+
+# Create a session
+spark = SparkSession.builder().appName(&quot;MyApp&quot;).getOrCreate()
+
+# Read data
+df = spark.read.csv(&quot;data.csv&quot;, header=True)
+
+# Transform
+result = df.select([&quot;name&quot;, &quot;age&quot;]) \
+           .filter(&quot;age &gt; 18&quot;) \
+           .groupBy([&quot;city&quot;]) \
+           .count()
+
+# Show results
+result.show()</code></pre></div><h3 id="architecture"><a class="doc-anchor" href="#architecture">§</a>Architecture</h3>
+<p>PyRust consists of three main components:</p>
+<ul>
+<li><strong>Session Management</strong> - Spark session creation and data reading (SparkSession, DataFrameReader)</li>
+<li><strong>DataFrame Operations</strong> - Distributed data transformations (DataFrame, GroupedData)</li>
+<li><strong>Utilities</strong> - Type conversions and helper functions</li>
+</ul>
+<h3 id="performance"><a class="doc-anchor" href="#performance">§</a>Performance</h3>
+<p>PyRust achieves significant performance improvements through:</p>
+<ul>
+<li><strong>Columnar Processing</strong>: Uses Apache Arrow for efficient vectorized operations</li>
+<li><strong>Lazy Evaluation</strong>: Operations are optimized before execution</li>
+<li><strong>Zero-Copy Interop</strong>: Direct memory sharing with Python via PyArrow</li>
+<li><strong>Parallel Execution</strong>: Leverages Rust’s async runtime for concurrent operations</li>
+</ul>
+</div></details></section></div></main></body></html>
