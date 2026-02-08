@@ -123,9 +123,8 @@ jobs:
       - name: Verify installation
         run: |
           python -c "import sys; print(f'Python: {sys.version}')"
-          python -c "import sys; print('Python path:', sys.path)"
           python -c "import pyrust; print(f'PyRust version: {pyrust.__version__}')"
-          python -c "from pyrust import SparkSession; spark = SparkSession.builder().appName('Test').getOrCreate(); print(f'SparkSession created: {spark.appName}')"
+          python -c "from pyrust import SparkSession; spark = SparkSession.builder.appName('Test').getOrCreate(); print(f'SparkSession created: {spark.appName}')"
 
       - name: Run tests
         run: pytest python/tests/ -v --tb=short
