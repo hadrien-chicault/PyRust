@@ -16,9 +16,11 @@ env/
 
 # Rust build artifacts
 target/
-Cargo.lock
 **/*.rs.bk
 *.pdb
+
+# Keep Cargo.lock for reproducible builds
+# (Uncommented = tracked in git)
 
 # C extensions
 *.so

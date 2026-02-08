@@ -1,4 +1,5 @@
 use pyo3::prelude::*;
+use pyo3::types::PyModule;
 
 mod session;
 mod dataframe;
@@ -9,7 +10,7 @@ use dataframe::{PyDataFrame, PyGroupedData};
 
 /// PyRust - A Rust-based implementation of PySpark
 #[pymodule]
-fn _pyrust(_py: Python, m: &PyModule) -> PyResult<()> {
+fn _pyrust(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<PySparkSession>()?;
     m.add_class::<PySparkSessionBuilder>()?;
     m.add_class::<PyDataFrameReader>()?;

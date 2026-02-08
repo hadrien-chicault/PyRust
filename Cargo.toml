@@ -13,11 +13,11 @@ name = "pyrust"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = { version = "0.20", features = ["extension-module"] }
-datafusion = "43.0"
-arrow = "53.3"
-arrow-schema = "53.3"
-tokio = { version = "1", features = ["full"] }
+pyo3 = { version = "0.20.3", features = ["extension-module"] }
+datafusion = "43.0.0"
+arrow = "53.3.0"
+arrow-schema = "53.3.0"
+tokio = { version = "1.49", features = ["full"] }
 anyhow = "1.0"
 
 [build-dependencies]

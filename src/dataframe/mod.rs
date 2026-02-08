@@ -251,17 +251,17 @@ impl PyGroupedData {
     }
 
     /// General aggregation
-    fn agg(&self, exprs: Vec<(&str, &str)>) -> PyResult<PyDataFrame> {
+    fn agg(&self, exprs: Vec<(String, String)>) -> PyResult<PyDataFrame> {
         let rt = PyDataFrame::runtime()?;
 
         let agg_exprs: Vec<Expr> = exprs.iter().map(|(col_name, func)| {
-            match *func {
-                "count" => count(col(*col_name)).alias(&format!("count({})", col_name)),
-                "sum" => sum(col(*col_name)).alias(&format!("sum({})", col_name)),
-                "avg" | "mean" => avg(col(*col_name)).alias(&format!("avg({})", col_name)),
-                "min" => min(col(*col_name)).alias(&format!("min({})", col_name)),
-                "max" => max(col(*col_name)).alias(&format!("max({})", col_name)),
-                _ => count(col(*col_name)).alias("count"),  // fallback
+            match func.as_str() {
+                "count" => count(col(col_name.as_str())).alias(&format!("count({})", col_name)),
+                "sum" => sum(col(col_name.as_str())).alias(&format!("sum({})", col_name)),
+                "avg" | "mean" => avg(col(col_name.as_str())).alias(&format!("avg({})", col_name)),
+                "min" => min(col(col_name.as_str())).alias(&format!("min({})", col_name)),
+                "max" => max(col(col_name.as_str())).alias(&format!("max({})", col_name)),
+                _ => count(col(col_name.as_str())).alias("count"),  // fallback
             }
         }).collect();
 
