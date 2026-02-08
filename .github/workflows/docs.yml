@@ -29,7 +29,8 @@ jobs:
       - name: Install PyRust
         run: |
           pip install maturin
-          maturin develop
+          maturin build --release --out dist
+          pip install dist/*.whl
 
       - name: Build Rust docs
         run: cargo doc --no-deps
