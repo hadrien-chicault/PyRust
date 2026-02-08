@@ -224,10 +224,49 @@ jobs:
           file: ./coverage.xml
           fail_ci_if_error: false
 
+  build-docs:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          key: rust-docs
+
+      - name: Build Rust documentation
+        run: |
+          cargo doc --no-deps --all-features
+          echo "<meta http-equiv=\"refresh\" content=\"0; url=pyrust\">" > target/doc/index.html
+
+      - name: Upload documentation artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rust-docs
+          path: target/doc/
+          retention-days: 30
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/doc
+          destination_dir: docs
+
   release:
     name: Create Release & Publish Package
     runs-on: ubuntu-latest
-    needs: [lint-rust, lint-python, test, build-wheels, build-sdist]
+    needs: [lint-rust, lint-python, test, build-wheels, build-sdist, build-docs]
     if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.create_release == true)
     permissions:
       contents: write
@@ -266,6 +305,19 @@ jobs:
         with:
           name: sdist
           path: dist
+
+      - name: Download documentation artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: rust-docs
+          path: docs-build
+
+      - name: Create documentation archive
+        run: |
+          cd docs-build
+          tar -czf ../dist/pyrust-docs-${{ steps.get_version.outputs.VERSION }}.tar.gz .
+          cd ..
+          ls -lh dist/pyrust-docs-*.tar.gz
 
       - name: List all distribution files
         run: |
@@ -326,6 +378,9 @@ jobs:
           - [README](https://github.com/${{ github.repository }}/blob/v${{ steps.get_version.outputs.VERSION }}/README.md)
           - [Quickstart Guide](https://github.com/${{ github.repository }}/blob/v${{ steps.get_version.outputs.VERSION }}/QUICKSTART.md)
           - [Architecture](https://github.com/${{ github.repository }}/blob/v${{ steps.get_version.outputs.VERSION }}/ARCHITECTURE.md)
+          - [API Documentation (Rust)](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/docs/)
+
+          **📖 Offline Documentation**: Download `pyrust-docs-${{ steps.get_version.outputs.VERSION }}.tar.gz` from this release for local browsing.
 
           ---
 
