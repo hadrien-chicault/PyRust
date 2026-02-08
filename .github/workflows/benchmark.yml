@@ -1,11 +1,9 @@
 name: Performance Benchmarks
 
 on:
-  push:
-    branches: [ master, main ]
-  pull_request:
-    branches: [ master, main ]
-  workflow_dispatch:
+  workflow_dispatch:  # Manual trigger only
+  release:
+    types: [published]  # Run on releases
 
 jobs:
   benchmark:
