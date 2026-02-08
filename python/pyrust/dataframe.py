@@ -3,7 +3,6 @@ DataFrame implementation - Python wrapper around Rust backend.
 """
 
 
-
 class DataFrame:
     """
     A distributed collection of data organized into named columns.
