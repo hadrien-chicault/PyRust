@@ -112,17 +112,18 @@ jobs:
       - name: Install maturin
         run: pip install maturin
 
-      - name: Build and install PyRust (direct install)
-        run: |
-          # Use maturin develop for direct installation
-          maturin develop --release
+      - name: Build PyRust wheel
+        run: maturin build --release --out dist
 
-      - name: Install test dependencies
-        run: pip install pytest pytest-benchmark pyarrow
+      - name: Install test dependencies and PyRust
+        run: |
+          pip install pytest pytest-benchmark pyarrow
+          pip install dist/*.whl
 
       - name: Verify installation
         run: |
           python -c "import sys; print(f'Python: {sys.version}')"
+          python -c "import sys; print('Python path:', sys.path)"
           python -c "import pyrust; print(f'PyRust version: {pyrust.__version__}')"
           python -c "from pyrust import SparkSession; spark = SparkSession.builder().appName('Test').getOrCreate(); print(f'SparkSession created: {spark.appName}')"
 
