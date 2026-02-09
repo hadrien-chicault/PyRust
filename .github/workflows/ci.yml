@@ -128,11 +128,10 @@ jobs:
 
       - name: Run tests
         run: |
-          # Temporarily rename python source to prevent pytest from importing it
-          # This forces imports to come from the installed wheel package
-          mv python python_source
-          pytest python_source/tests/ -v --tb=short
-          mv python_source python
+          # Remove python package from working dir to force import from site-packages
+          rm -rf python/pyrust
+          pytest python/tests/ -v --tb=short
+          git restore python/pyrust
 
       - name: Run example
         run: python examples/basic_operations.py
