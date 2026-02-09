@@ -87,7 +87,6 @@ nav:
       - Building: development/building.md
       - Testing: development/testing.md
       - Local CI: development/local-ci.md
-  - Rust API: rust-docs/index.html
 
 extra:
   social:

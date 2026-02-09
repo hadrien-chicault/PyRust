@@ -255,16 +255,34 @@ jobs:
         with:
           key: rust-docs
 
+      - name: Install documentation dependencies
+        run: |
+          pip install mkdocs mkdocs-material mkdocstrings[python]
+
       - name: Build Rust documentation
         run: |
           cargo doc --no-deps --all-features
           echo "<meta http-equiv=\"refresh\" content=\"0; url=pyrust\">" > target/doc/index.html
 
+      - name: Build Python documentation
+        run: |
+          mkdocs build
+
+      - name: Combine documentation
+        run: |
+          # Create combined docs directory
+          mkdir -p combined-docs
+          # Copy MkDocs output (Python docs) as main site
+          cp -r site/* combined-docs/
+          # Copy Rust docs into /rust subdirectory
+          mkdir -p combined-docs/rust
+          cp -r target/doc/* combined-docs/rust/
+
       - name: Upload documentation artifact
         uses: actions/upload-artifact@v4
         with:
-          name: rust-docs
-          path: target/doc/
+          name: documentation
+          path: combined-docs/
           retention-days: 30
 
       - name: Deploy to GitHub Pages
@@ -272,8 +290,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./target/doc
-          destination_dir: docs
+          publish_dir: ./combined-docs
 
   release:
     name: Create Release & Publish Package
@@ -321,7 +338,7 @@ jobs:
       - name: Download documentation artifact
         uses: actions/download-artifact@v4
         with:
-          name: rust-docs
+          name: documentation
           path: docs-build
 
       - name: Create documentation archive
@@ -329,6 +346,7 @@ jobs:
           cd docs-build
           tar -czf ../dist/pyrust-docs-${{ steps.get_version.outputs.VERSION }}.tar.gz .
           cd ..
+          echo "📦 Documentation archive created:"
           ls -lh dist/pyrust-docs-*.tar.gz
 
       - name: List all distribution files
@@ -390,9 +408,10 @@ jobs:
           - [README](https://github.com/${{ github.repository }}/blob/v${{ steps.get_version.outputs.VERSION }}/README.md)
           - [Quickstart Guide](https://github.com/${{ github.repository }}/blob/v${{ steps.get_version.outputs.VERSION }}/QUICKSTART.md)
           - [Architecture](https://github.com/${{ github.repository }}/blob/v${{ steps.get_version.outputs.VERSION }}/ARCHITECTURE.md)
-          - [API Documentation (Rust)](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/docs/)
+          - [📘 Complete Documentation](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/) - Python guides, tutorials, API reference
+          - [🦀 Rust API Documentation](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/rust/) - Rust implementation docs
 
-          **📖 Offline Documentation**: Download `pyrust-docs-${{ steps.get_version.outputs.VERSION }}.tar.gz` from this release for local browsing.
+          **📖 Offline Documentation**: Download `pyrust-docs-${{ steps.get_version.outputs.VERSION }}.tar.gz` from this release for complete Python + Rust documentation (browsable locally).
 
           ---
 

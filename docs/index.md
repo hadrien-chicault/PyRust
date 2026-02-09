@@ -95,7 +95,13 @@ Contributing guidelines, building from source, and testing.
 
 - **GitHub**: [hadrien-chicault/PyRust](https://github.com/hadrien-chicault/PyRust)
 - **Issues**: [Report bugs or request features](https://github.com/hadrien-chicault/PyRust/issues)
-- **Rust API Docs**: [Rust implementation documentation](https://hadrien-chicault.github.io/PyRust/docs/)
+- **🦀 Rust API Docs**: [Rust implementation documentation](rust/pyrust/index.html) - Low-level internals
+
+## Related Documentation
+
+- **[Rust API Reference](rust/pyrust/index.html)** - Detailed documentation of the Rust implementation
+- **[Apache DataFusion](https://datafusion.apache.org/)** - Query engine powering PyRust
+- **[Apache Arrow](https://arrow.apache.org/)** - Columnar format for efficient data processing
 
 ## License
 
