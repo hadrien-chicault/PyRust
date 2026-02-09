@@ -128,11 +128,11 @@ jobs:
 
       - name: Run tests
         run: |
-          # Copy tests and data to temp dir to avoid importing from source
-          cp -r python/tests /tmp/tests
-          cp -r examples /tmp/examples
-          cd /tmp
-          pytest tests/ -v --tb=short
+          # Temporarily rename python source to prevent pytest from importing it
+          # This forces imports to come from the installed wheel package
+          mv python python_source
+          pytest python_source/tests/ -v --tb=short
+          mv python_source python
 
       - name: Run example
         run: python examples/basic_operations.py
