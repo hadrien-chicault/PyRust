@@ -32,6 +32,11 @@ class SparkSession:
         """Get DataFrameReader for reading data."""
         return DataFrameReader(self._rust_session.read)
 
+    @property
+    def appName(self):
+        """Get the application name."""
+        return self._rust_session.appName
+
     def stop(self):
         """Stop the SparkSession."""
         self._rust_session.stop()
