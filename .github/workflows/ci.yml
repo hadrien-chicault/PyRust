@@ -128,8 +128,9 @@ jobs:
 
       - name: Run tests
         run: |
-          # Copy tests to temp dir to avoid importing from source
+          # Copy tests and data to temp dir to avoid importing from source
           cp -r python/tests /tmp/tests
+          cp -r examples /tmp/examples
           cd /tmp
           pytest tests/ -v --tb=short
 
