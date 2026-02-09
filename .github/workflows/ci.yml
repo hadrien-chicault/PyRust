@@ -127,7 +127,11 @@ jobs:
           python -c "from pyrust import SparkSession; spark = SparkSession.builder.appName('Test').getOrCreate(); print(f'SparkSession created: {spark.appName}')"
 
       - name: Run tests
-        run: pytest python/tests/ -v --tb=short
+        run: |
+          # Copy tests to temp dir to avoid importing from source
+          cp -r python/tests /tmp/tests
+          cd /tmp
+          pytest tests/ -v --tb=short
 
       - name: Run example
         run: python examples/basic_operations.py
