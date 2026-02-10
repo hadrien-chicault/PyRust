@@ -14,8 +14,9 @@ class DataFrame:
     >>> df.filter("age > 18").count()
     """
 
-    def __init__(self, rust_dataframe):
+    def __init__(self, rust_dataframe, session=None):
         self._rust_df = rust_dataframe
+        self._session = session  # Optional reference to SparkSession for temp views
 
     def select(self, *cols: str) -> "DataFrame":
         """
@@ -36,7 +37,7 @@ class DataFrame:
         >>> df.select("name", "age")
         """
         rust_df = self._rust_df.select(list(cols))
-        return DataFrame(rust_df)
+        return DataFrame(rust_df, session=self._session)
 
     def filter(self, condition: str) -> "DataFrame":
         """
@@ -58,7 +59,7 @@ class DataFrame:
         >>> df.filter("name == 'Alice'")
         """
         rust_df = self._rust_df.filter(condition)
-        return DataFrame(rust_df)
+        return DataFrame(rust_df, session=self._session)
 
     def where(self, condition: str) -> "DataFrame":
         """Alias for filter()."""
@@ -106,7 +107,7 @@ class DataFrame:
         >>> df.orderBy("age", "name")
         """
         rust_df = self._rust_df.orderBy(list(cols))
-        return DataFrame(rust_df)
+        return DataFrame(rust_df, session=self._session)
 
     def sort(self, *cols: str) -> "DataFrame":
         """Alias for orderBy()."""
@@ -163,7 +164,7 @@ class DataFrame:
             on = [on]
 
         rust_df = self._rust_df.join(other._rust_df, on=on, how=how)
-        return DataFrame(rust_df)
+        return DataFrame(rust_df, session=self._session)
 
     def limit(self, n: int) -> "DataFrame":
         """
@@ -184,7 +185,7 @@ class DataFrame:
         >>> df.limit(10)
         """
         rust_df = self._rust_df.limit(n)
-        return DataFrame(rust_df)
+        return DataFrame(rust_df, session=self._session)
 
     def count(self) -> int:
         """
@@ -237,6 +238,36 @@ class DataFrame:
         """Get the schema as a string."""
         return self._rust_df.schema()
 
+    def createOrReplaceTempView(self, name: str):
+        """
+        Register this DataFrame as a temporary view.
+
+        The view is session-scoped and can be referenced in SQL queries.
+
+        Parameters
+        ----------
+        name : str
+            Name of the temporary view
+
+        Examples
+        --------
+        >>> df = spark.read.csv("users.csv")
+        >>> df.createOrReplaceTempView("users")
+        >>> result = spark.sql("SELECT * FROM users WHERE age > 18")
+
+        Notes
+        -----
+        Requires a session reference. If the DataFrame was created without
+        a session reference, this method will raise an error.
+        """
+        if self._session is None:
+            raise RuntimeError(
+                "Cannot create temp view: DataFrame has no session reference. "
+                "This can happen if the DataFrame was created directly instead of "
+                "through SparkSession methods."
+            )
+        self._session.register_temp_view(self, name)
+
     def __repr__(self):
         return repr(self._rust_df)
 
@@ -269,7 +300,7 @@ class GroupedData:
         >>> df.groupBy("city").count()
         """
         rust_df = self._rust_grouped.count()
-        return DataFrame(rust_df)
+        return DataFrame(rust_df, session=self._session)
 
     def agg(self, *exprs) -> DataFrame:
         """
@@ -299,7 +330,7 @@ class GroupedData:
                 raise ValueError(f"Expected tuple of (column, function), got {expr}")
 
         rust_df = self._rust_grouped.agg(expr_list)
-        return DataFrame(rust_df)
+        return DataFrame(rust_df, session=self._session)
 
     def sum(self, *cols: str) -> DataFrame:
         """Compute sum for specified columns."""

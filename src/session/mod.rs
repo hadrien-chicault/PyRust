@@ -455,6 +455,128 @@ impl PySparkSession {
         ))
     }
 
+    /// Executes a SQL query and returns the result as a DataFrame.
+    ///
+    /// This method allows you to run SQL queries directly, leveraging DataFusion's
+    /// full SQL engine. It supports standard SQL syntax including SELECT, WHERE,
+    /// GROUP BY, ORDER BY, joins, subqueries, and window functions.
+    ///
+    /// # Arguments
+    ///
+    /// * `query` - SQL query string to execute
+    ///
+    /// # Returns
+    ///
+    /// A DataFrame containing the query results.
+    ///
+    /// # SQL Support
+    ///
+    /// PyRust supports full ANSI SQL via DataFusion:
+    /// - SELECT, WHERE, GROUP BY, HAVING, ORDER BY
+    /// - Joins (INNER, LEFT, RIGHT, FULL, CROSS)
+    /// - Subqueries and CTEs (WITH)
+    /// - Window functions (ROW_NUMBER, RANK, etc.)
+    /// - Aggregate functions (COUNT, SUM, AVG, MIN, MAX)
+    /// - String, date, and math functions
+    ///
+    /// # Performance
+    ///
+    /// - SQL queries are optimized by DataFusion's query planner
+    /// - Predicate pushdown and column pruning applied automatically
+    /// - Vectorized execution for high performance
+    ///
+    /// # Errors
+    ///
+    /// Returns a `PyRuntimeError` if:
+    /// - SQL syntax is invalid
+    /// - Referenced tables/views don't exist
+    /// - Query execution fails
+    ///
+    /// # Examples
+    ///
+    /// ```python
+    /// # Simple SELECT
+    /// df = spark.sql("SELECT name, age FROM users WHERE age > 18")
+    ///
+    /// # With aggregation
+    /// df = spark.sql(\"\"\"
+    ///     SELECT city, COUNT(*) as count, AVG(age) as avg_age
+    ///     FROM users
+    ///     GROUP BY city
+    ///     ORDER BY count DESC
+    /// \"\"\")
+    ///
+    /// # With joins (requires temp views)
+    /// users_df.createOrReplaceTempView("users")
+    /// orders_df.createOrReplaceTempView("orders")
+    /// df = spark.sql(\"\"\"
+    ///     SELECT u.name, COUNT(o.id) as order_count
+    ///     FROM users u
+    ///     JOIN orders o ON u.id = o.user_id
+    ///     GROUP BY u.name
+    /// \"\"\")
+    /// ```
+    fn sql(&self, query: &str) -> PyResult<PyDataFrame> {
+        // Use tokio runtime to execute async datafusion operations
+        let rt = tokio::runtime::Runtime::new()
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to create runtime: {}", e)))?;
+
+        let df = rt
+            .block_on(async {
+                // Execute SQL query via DataFusion
+                self.ctx.sql(query).await
+            })
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to execute SQL: {}", e)))?;
+
+        Ok(PyDataFrame::new(df))
+    }
+
+    /// Registers a DataFrame as a temporary view/table.
+    ///
+    /// This allows SQL queries to reference the DataFrame by name. The view is
+    /// session-scoped and will be available until the session ends or the view
+    /// is replaced.
+    ///
+    /// # Arguments
+    ///
+    /// * `df` - The DataFrame to register
+    /// * `name` - The name to assign to the view
+    ///
+    /// # Errors
+    ///
+    /// Returns a `PyRuntimeError` if registration fails.
+    ///
+    /// # Example
+    ///
+    /// ```python
+    /// df = spark.read.csv("users.csv")
+    /// spark.register_temp_view(df, "users")
+    /// result = spark.sql("SELECT * FROM users WHERE age > 18")
+    /// ```
+    ///
+    /// # Note
+    ///
+    /// This is a helper method. In PySpark, you would use `df.createOrReplaceTempView()`.
+    /// For API compatibility, use the Python wrapper which delegates to this method.
+    fn register_temp_view(&self, df: &PyDataFrame, name: &str) -> PyResult<()> {
+        let rt = tokio::runtime::Runtime::new()
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to create runtime: {}", e)))?;
+
+        rt.block_on(async {
+            // First, deregister any existing table with this name (ignore errors if doesn't exist)
+            let _ = self.ctx.deregister_table(name);
+
+            // Now register the new table
+            self.ctx
+                .register_table(name, df.inner_df().as_ref().clone().into_view())
+        })
+        .map_err(|e| {
+            PyRuntimeError::new_err(format!("Failed to register temp view '{}': {}", name, e))
+        })?;
+
+        Ok(())
+    }
+
     /// Stops the SparkSession and releases resources.
     ///
     /// **Note**: In the current implementation, this is a no-op. Future versions

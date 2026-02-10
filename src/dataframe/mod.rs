@@ -127,6 +127,18 @@ impl PyDataFrame {
     fn clone_df(&self) -> DataFrame {
         self.df.as_ref().clone()
     }
+
+    /// Returns a reference to the underlying DataFrame.
+    ///
+    /// This is used internally by other PyRust modules that need access
+    /// to the wrapped DataFusion DataFrame.
+    ///
+    /// # Returns
+    ///
+    /// A reference to the Arc-wrapped DataFrame.
+    pub(crate) fn inner_df(&self) -> &Arc<DataFrame> {
+        &self.df
+    }
 }
 
 #[pymethods]
