@@ -1093,9 +1093,6 @@ impl PyDataFrame {
 
         let df = rt
             .block_on(async {
-                let left_df = self.clone_df();
-                let right_df = other.clone_df();
-
                 // All joins need join keys
                 let join_keys = on.ok_or_else(|| {
                     datafusion::error::DataFusionError::Plan(
@@ -1109,43 +1106,102 @@ impl PyDataFrame {
                     ));
                 }
 
-                // Convert to slices for DataFusion's join API
-                let left_keys: Vec<&str> = join_keys.iter().map(|s| s.as_str()).collect();
-                let right_keys: Vec<&str> = join_keys.iter().map(|s| s.as_str()).collect();
+                // Create a new SessionContext and register both DataFrames as temporary tables
+                let ctx = datafusion::prelude::SessionContext::new();
+                let left_df = self.clone_df();
+                let right_df = other.clone_df();
 
-                // Perform the join
-                let joined = left_df.join(right_df, join_type, &left_keys, &right_keys, None)?;
+                // Create temporary unique table names
+                use std::sync::atomic::{AtomicU64, Ordering};
+                static COUNTER: AtomicU64 = AtomicU64::new(0);
+                let id = COUNTER.fetch_add(1, Ordering::SeqCst);
+                let left_table = format!("__left_{}", id);
+                let right_table = format!("__right_{}", id);
 
-                // Get all column names from the joined DataFrame
-                let schema = joined.schema();
-                let all_cols: Vec<Expr> = schema
-                    .fields()
+                ctx.register_table(&left_table, left_df.clone().into_view())?;
+                ctx.register_table(&right_table, right_df.clone().into_view())?;
+
+                // Build the join condition (e.g., "l.name = r.name AND l.city = r.city")
+                let join_conditions: Vec<String> = join_keys
                     .iter()
-                    .enumerate()
-                    .filter_map(|(idx, field)| {
-                        let name = field.name();
-                        // Skip duplicate join key columns (they appear twice)
-                        // Keep only the first occurrence
-                        if join_keys.contains(&name.to_string()) {
-                            // Check if this is the first occurrence
-                            let first_idx = schema
-                                .fields()
-                                .iter()
-                                .position(|f| f.name() == name)
-                                .unwrap();
-                            if idx == first_idx {
-                                Some(col(name))
-                            } else {
-                                None // Skip duplicate
-                            }
-                        } else {
-                            Some(col(name))
-                        }
-                    })
+                    .map(|key| format!("l.{} = r.{}", key, key))
                     .collect();
+                let join_condition = join_conditions.join(" AND ");
 
-                // Select to remove duplicate columns
-                joined.select(all_cols)
+                // Build column select list (left columns + right columns, excluding duplicate join keys from right)
+                let left_schema = left_df.schema();
+                let right_schema = right_df.schema();
+
+                let mut select_cols = Vec::new();
+
+                // Add all left columns
+                for field in left_schema.fields() {
+                    select_cols.push(format!("l.{}", field.name()));
+                }
+
+                // Add right columns except join keys (to avoid duplicates)
+                for field in right_schema.fields() {
+                    if !join_keys.contains(&field.name().to_string()) {
+                        select_cols.push(format!("r.{}", field.name()));
+                    }
+                }
+
+                let select_clause = select_cols.join(", ");
+
+                // Build SQL query based on join type
+                let sql = match join_type {
+                    JoinType::Inner => format!(
+                        "SELECT {} FROM {} l INNER JOIN {} r ON {}",
+                        select_clause, left_table, right_table, join_condition
+                    ),
+                    JoinType::Left => format!(
+                        "SELECT {} FROM {} l LEFT JOIN {} r ON {}",
+                        select_clause, left_table, right_table, join_condition
+                    ),
+                    JoinType::Right => {
+                        // For right join, we need to reverse - all right columns + left non-key columns
+                        let mut right_select = Vec::new();
+                        for field in right_schema.fields() {
+                            right_select.push(format!("r.{}", field.name()));
+                        }
+                        for field in left_schema.fields() {
+                            if !join_keys.contains(&field.name().to_string()) {
+                                right_select.push(format!("l.{}", field.name()));
+                            }
+                        }
+                        let right_select_clause = right_select.join(", ");
+                        format!(
+                            "SELECT {} FROM {} l RIGHT JOIN {} r ON {}",
+                            right_select_clause, left_table, right_table, join_condition
+                        )
+                    }
+                    JoinType::Full => format!(
+                        "SELECT {} FROM {} l FULL OUTER JOIN {} r ON {}",
+                        select_clause, left_table, right_table, join_condition
+                    ),
+                    JoinType::LeftSemi => format!(
+                        "SELECT l.* FROM {} l WHERE EXISTS (SELECT 1 FROM {} r WHERE {})",
+                        left_table, right_table, join_condition
+                    ),
+                    JoinType::LeftAnti => format!(
+                        "SELECT l.* FROM {} l WHERE NOT EXISTS (SELECT 1 FROM {} r WHERE {})",
+                        left_table, right_table, join_condition
+                    ),
+                    _ => {
+                        return Err(datafusion::error::DataFusionError::Plan(format!(
+                            "Unsupported join type: {:?}",
+                            join_type
+                        )))
+                    }
+                };
+
+                // Execute SQL
+                let result_df = ctx.sql(&sql).await?;
+
+                // Deregister temporary tables
+                // Note: DataFusion doesn't have a deregister method, but tables will be dropped when context goes out of scope
+
+                Ok::<datafusion::prelude::DataFrame, datafusion::error::DataFusionError>(result_df)
             })
             .map_err(|e| PyRuntimeError::new_err(format!("Failed to join DataFrames: {}", e)))?;
 
