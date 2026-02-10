@@ -84,6 +84,7 @@ nav:
       - DataFrame: api/dataframe.md
       - Context: api/context.md
       - Operations: api/operations.md
+      - Limitations: limitations.md
   - Architecture:
       - Overview: architecture/overview.md
       - Rust Core: architecture/rust-core.md

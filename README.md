@@ -73,7 +73,9 @@ spark.stop()
 
 ## 📚 Documentation
 
-### Supported Operations (POC v0.1.0)
+Full documentation available at: **[PyRust Docs](https://hadrien-chicault.github.io/PyRust/)**
+
+### Supported Operations (v0.3.0)
 
 #### DataFrame Operations
 - ✅ `select()` - Select columns
@@ -86,16 +88,40 @@ spark.stop()
 - ✅ `show()` - Display data
 - ✅ `printSchema()` - Show schema
 
+#### Joins (All Types)
+- ✅ `join()` - Inner, left, right, full outer joins
+- ✅ Semi and anti joins for filtering
+- ✅ Multi-column joins
+
+#### Data Operations
+- ✅ `distinct()` - Remove duplicates
+- ✅ `dropDuplicates()` - Remove duplicates by columns
+- ✅ `union()` / `unionAll()` - Combine DataFrames
+- ✅ `intersect()` - Find common rows
+- ✅ `exceptAll()` / `subtract()` - Find differences
+
+#### Column Operations
+- ✅ `withColumnRenamed()` - Rename columns
+
+#### SQL Support
+- ✅ `spark.sql()` - Execute SQL queries
+- ✅ `createOrReplaceTempView()` - Create temp tables
+
 #### Data Sources
 - ✅ CSV files (with header inference)
 - ✅ Parquet files
 
-#### Aggregation Functions
-- ✅ count
-- ✅ sum
-- ✅ avg / mean
-- ✅ min
-- ✅ max
+### Known Limitations
+
+⚠️ **Current limitations (see [ROADMAP.md](ROADMAP.md) for details):**
+
+- `select()` only accepts column names, not expressions
+- No `withColumn()` for adding/modifying columns
+- No window functions (row_number, rank, lag, lead)
+- No column functions (upper, concat, cast)
+- No DataFrame write operations yet
+
+**Workaround:** Use SQL queries for complex expressions and transformations.
 
 ### Example
 
