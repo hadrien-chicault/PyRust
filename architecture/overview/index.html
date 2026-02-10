@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../../limitations/">
       
       
-        <link rel="next" href="../quickstart/">
+        <link rel="next" href="../rust-core/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Installation - PyRust Documentation</title>
+        <title>Overview - PyRust Documentation</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
+        <a href="#architecture-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Installation
+              Overview
             
           </span>
         </div>
@@ -247,13 +247,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation/" class="md-tabs__link">
           
   
   
@@ -309,11 +307,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../architecture/overview/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -420,31 +420,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
@@ -462,7 +457,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -477,37 +472,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Installation
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
         
   
   
@@ -523,259 +491,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Requirements
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation-methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation Methods
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Installation Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#via-pip-recommended" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Via pip (Recommended)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#from-github-release" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        From GitHub Release
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#from-source" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        From Source
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#using-uv-fast-python-package-manager" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Using UV (Fast Python Package Manager)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verify-installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Verify Installation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#optional-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Optional Dependencies
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Optional Dependencies">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-development" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        For Development
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-data-analysis" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        For Data Analysis
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#platform-specific-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Platform-Specific Notes
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Platform-Specific Notes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#linux" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Linux
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#macos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        macOS
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#windows" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Windows
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-error" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Import Error
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#permission-denied" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Permission Denied
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rust-version-too-old" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rust Version Too Old
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Next Steps
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -788,7 +503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quickstart/" class="md-nav__link">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
         
   
   
@@ -816,7 +531,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../basic-operations/" class="md-nav__link">
+      <a href="../../getting-started/basic-operations/" class="md-nav__link">
         
   
   
@@ -1302,26 +1017,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -1339,7 +1059,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1354,10 +1074,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../architecture/overview/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1373,6 +1120,276 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#high-level-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High-Level Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-python-api-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Python API Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-rust-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Rust Core
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-apache-arrow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Apache Arrow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Flow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#query-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Query Execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Principles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Design Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-lazy-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Lazy Evaluation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-immutability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Immutability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-zero-copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Zero-Copy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-type-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Type Safety
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Characteristics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance Characteristics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strengths
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memory-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Memory Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Memory Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arrow-columnar-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arrow Columnar Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference Counting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See Also
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1385,7 +1402,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/rust-core/" class="md-nav__link">
+      <a href="../rust-core/" class="md-nav__link">
         
   
   
@@ -1413,7 +1430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/python-bindings/" class="md-nav__link">
+      <a href="../python-bindings/" class="md-nav__link">
         
   
   
@@ -1639,10 +1656,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#high-level-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requirements
+        High-Level Architecture
       
     </span>
   </a>
@@ -1650,22 +1667,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation-methods" class="md-nav__link">
+  <a href="#key-components" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation Methods
+        Key Components
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Installation Methods">
+    <nav class="md-nav" aria-label="Key Components">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#via-pip-recommended" class="md-nav__link">
+  <a href="#1-python-api-layer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Via pip (Recommended)
+        1. Python API Layer
       
     </span>
   </a>
@@ -1673,10 +1690,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#from-github-release" class="md-nav__link">
+  <a href="#2-rust-core" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From GitHub Release
+        2. Rust Core
       
     </span>
   </a>
@@ -1684,21 +1701,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#from-source" class="md-nav__link">
+  <a href="#3-apache-arrow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From Source
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#using-uv-fast-python-package-manager" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Using UV (Fast Python Package Manager)
+        3. Apache Arrow
       
     </span>
   </a>
@@ -1711,33 +1717,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verify-installation" class="md-nav__link">
+  <a href="#data-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verify Installation
+        Data Flow
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#optional-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Optional Dependencies
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Optional Dependencies">
+    <nav class="md-nav" aria-label="Data Flow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#for-development" class="md-nav__link">
+  <a href="#query-execution" class="md-nav__link">
     <span class="md-ellipsis">
       
-        For Development
+        Query Execution
       
     </span>
   </a>
@@ -1745,10 +1740,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#for-data-analysis" class="md-nav__link">
+  <a href="#example-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        For Data Analysis
+        Example Flow
       
     </span>
   </a>
@@ -1761,22 +1756,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#platform-specific-notes" class="md-nav__link">
+  <a href="#design-principles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Platform-Specific Notes
+        Design Principles
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Platform-Specific Notes">
+    <nav class="md-nav" aria-label="Design Principles">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#linux" class="md-nav__link">
+  <a href="#1-lazy-evaluation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Linux
+        1. Lazy Evaluation
       
     </span>
   </a>
@@ -1784,10 +1779,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#macos" class="md-nav__link">
+  <a href="#2-immutability" class="md-nav__link">
     <span class="md-ellipsis">
       
-        macOS
+        2. Immutability
       
     </span>
   </a>
@@ -1795,10 +1790,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#windows" class="md-nav__link">
+  <a href="#3-zero-copy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Windows
+        3. Zero-Copy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-type-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Type Safety
       
     </span>
   </a>
@@ -1811,22 +1817,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#performance-characteristics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
+        Performance Characteristics
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Troubleshooting">
+    <nav class="md-nav" aria-label="Performance Characteristics">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-error" class="md-nav__link">
+  <a href="#strengths" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Import Error
+        Strengths
       
     </span>
   </a>
@@ -1834,21 +1840,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#permission-denied" class="md-nav__link">
+  <a href="#comparison" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Permission Denied
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rust-version-too-old" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rust Version Too Old
+        Comparison
       
     </span>
   </a>
@@ -1861,10 +1856,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
+  <a href="#memory-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Next Steps
+        Memory Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Memory Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arrow-columnar-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arrow Columnar Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference Counting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See Also
       
     </span>
   </a>
@@ -1891,141 +1925,193 @@
   
 
 
-<h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h1>
-<p>This guide will help you install PyRust on your system.</p>
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
+<h1 id="architecture-overview">Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permanent link">&para;</a></h1>
+<p>PyRust is built on a modern, high-performance architecture leveraging the best of Rust and Python ecosystems.</p>
+<h2 id="high-level-architecture">High-Level Architecture<a class="headerlink" href="#high-level-architecture" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌─────────────────────────────────────────────┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│          Python Application Layer           │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│         (PySpark-compatible API)            │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>└─────────────────┬───────────────────────────┘
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                  │ PyO3 Bindings
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>┌─────────────────▼───────────────────────────┐
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│           Rust Execution Layer              │
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│                                             │
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│  ┌──────────────┐      ┌─────────────────┐ │
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│  │   PyRust     │      │   DataFusion    │ │
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│  │   Wrappers   │─────▶│  Query Engine   │ │
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│  └──────────────┘      └─────────────────┘ │
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│                                             │
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>└─────────────────┬───────────────────────────┘
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                  │
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>┌─────────────────▼───────────────────────────┐
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│          Apache Arrow Layer                 │
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│       (Columnar Memory Format)              │
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>└─────────────────────────────────────────────┘
+</code></pre></div>
+<h2 id="key-components">Key Components<a class="headerlink" href="#key-components" title="Permanent link">&para;</a></h2>
+<h3 id="1-python-api-layer">1. Python API Layer<a class="headerlink" href="#1-python-api-layer" title="Permanent link">&para;</a></h3>
+<p><strong>Location:</strong> <code>python/pyrust/</code></p>
+<p>The Python API provides a PySpark-compatible interface:</p>
 <ul>
-<li><strong>Python</strong>: 3.8 or higher</li>
-<li><strong>Rust</strong>: 1.70 or higher (only for building from source)</li>
-<li><strong>Operating System</strong>: Linux, macOS, or Windows</li>
+<li><code>SparkSession</code> - Session management</li>
+<li><code>DataFrame</code> - Main data structure</li>
+<li><code>GroupedData</code> - Aggregation interface</li>
+<li><code>DataFrameReader</code> - Data loading</li>
 </ul>
-<h2 id="installation-methods">Installation Methods<a class="headerlink" href="#installation-methods" title="Permanent link">&para;</a></h2>
-<h3 id="via-pip-recommended">Via pip (Recommended)<a class="headerlink" href="#via-pip-recommended" title="Permanent link">&para;</a></h3>
-<p>Once PyRust is published to PyPI, installation is simple:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>pyrust
-</code></pre></div>
-<h3 id="from-github-release">From GitHub Release<a class="headerlink" href="#from-github-release" title="Permanent link">&para;</a></h3>
-<p>Download a pre-built wheel from the <a href="https://github.com/hadrien-chicault/PyRust/releases">releases page</a>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Linux x86_64</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>pip<span class="w"> </span>install<span class="w"> </span>https://github.com/hadrien-chicault/PyRust/releases/download/v0.1.0/pyrust-0.1.0-cp312-cp312-linux_x86_64.whl
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># macOS x86_64</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>pip<span class="w"> </span>install<span class="w"> </span>https://github.com/hadrien-chicault/PyRust/releases/download/v0.1.0/pyrust-0.1.0-cp312-cp312-macosx_x86_64.whl
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># macOS ARM64 (Apple Silicon)</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>pip<span class="w"> </span>install<span class="w"> </span>https://github.com/hadrien-chicault/PyRust/releases/download/v0.1.0/pyrust-0.1.0-cp312-cp312-macosx_arm64.whl
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># Windows x86_64</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>pip<span class="w"> </span>install<span class="w"> </span>https://github.com/hadrien-chicault/PyRust/releases/download/v0.1.0/pyrust-0.1.0-cp312-cp312-win_amd64.whl
-</code></pre></div>
-<h3 id="from-source">From Source<a class="headerlink" href="#from-source" title="Permanent link">&para;</a></h3>
-<p>Building from source requires Rust and Maturin:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Clone the repository</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/hadrien-chicault/PyRust.git
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">cd</span><span class="w"> </span>PyRust
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># Install Rust (if not already installed)</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>curl<span class="w"> </span>--proto<span class="w"> </span><span class="s1">&#39;=https&#39;</span><span class="w"> </span>--tlsv1.2<span class="w"> </span>-sSf<span class="w"> </span>https://sh.rustup.rs<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># Install maturin</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>pip<span class="w"> </span>install<span class="w"> </span>maturin
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># Build and install</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>maturin<span class="w"> </span>develop<span class="w"> </span>--release
-</code></pre></div>
-<h3 id="using-uv-fast-python-package-manager">Using UV (Fast Python Package Manager)<a class="headerlink" href="#using-uv-fast-python-package-manager" title="Permanent link">&para;</a></h3>
-<p><a href="https://github.com/astral-sh/uv">UV</a> is a fast Python package installer:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Install UV</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>curl<span class="w"> </span>-LsSf<span class="w"> </span>https://astral.sh/uv/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Install PyRust</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pyrust
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Or build from source</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/hadrien-chicault/PyRust.git
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="nb">cd</span><span class="w"> </span>PyRust
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>maturin
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>maturin<span class="w"> </span>develop<span class="w"> </span>--release
-</code></pre></div>
-<h2 id="verify-installation">Verify Installation<a class="headerlink" href="#verify-installation" title="Permanent link">&para;</a></h2>
-<p>Test that PyRust is correctly installed:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyrust</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># Create a session</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span> \
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;TestApp&quot;</span><span class="p">)</span> \
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PyRust installed successfully!&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;App name: </span><span class="si">{</span><span class="n">spark</span><span class="o">.</span><span class="n">appName</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>Expected output:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>PyRust installed successfully!
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>App name: TestApp
-</code></pre></div></p>
-<h2 id="optional-dependencies">Optional Dependencies<a class="headerlink" href="#optional-dependencies" title="Permanent link">&para;</a></h2>
-<h3 id="for-development">For Development<a class="headerlink" href="#for-development" title="Permanent link">&para;</a></h3>
-<p>If you're contributing to PyRust, install development dependencies:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pip<span class="w"> </span>install<span class="w"> </span>pyrust<span class="o">[</span>dev<span class="o">]</span>
-</code></pre></div>
-<p>This includes:
-- <code>pytest</code> - Testing framework
-- <code>pytest-benchmark</code> - Performance benchmarking
-- <code>pandas</code> - For comparison tests
-- <code>maturin</code> - Build tool</p>
-<h3 id="for-data-analysis">For Data Analysis<a class="headerlink" href="#for-data-analysis" title="Permanent link">&para;</a></h3>
-<p>Additional libraries you might want:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Arrow for data interchange</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>pip<span class="w"> </span>install<span class="w"> </span>pyarrow
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Pandas for comparison</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>pip<span class="w"> </span>install<span class="w"> </span>pandas
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># Jupyter for interactive analysis</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>pip<span class="w"> </span>install<span class="w"> </span>jupyter
-</code></pre></div>
-<h2 id="platform-specific-notes">Platform-Specific Notes<a class="headerlink" href="#platform-specific-notes" title="Permanent link">&para;</a></h2>
-<h3 id="linux">Linux<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h3>
-<p>On Linux, you may need to install additional system dependencies:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Ubuntu/Debian</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>python3-dev
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># Fedora/RHEL</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>gcc<span class="w"> </span>python3-devel
-</code></pre></div>
-<h3 id="macos">macOS<a class="headerlink" href="#macos" title="Permanent link">&para;</a></h3>
-<p>On macOS, ensure Xcode Command Line Tools are installed:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>xcode-select<span class="w"> </span>--install
-</code></pre></div>
-<h3 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h3>
-<p>On Windows, install the Visual C++ Build Tools:</p>
-<ol>
-<li>Download from <a href="https://visualstudio.microsoft.com/downloads/">Visual Studio Downloads</a></li>
-<li>Install "Desktop development with C++"</li>
-</ol>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="import-error">Import Error<a class="headerlink" href="#import-error" title="Permanent link">&para;</a></h3>
-<p>If you get <code>ImportError: No module named '_pyrust'</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Reinstall with --force-reinstall</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>pip<span class="w"> </span>install<span class="w"> </span>--force-reinstall<span class="w"> </span>pyrust
-</code></pre></div>
-<h3 id="permission-denied">Permission Denied<a class="headerlink" href="#permission-denied" title="Permanent link">&para;</a></h3>
-<p>On Linux/macOS, if you get permission errors:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Install for current user only</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>pyrust
-</code></pre></div>
-<h3 id="rust-version-too-old">Rust Version Too Old<a class="headerlink" href="#rust-version-too-old" title="Permanent link">&para;</a></h3>
-<p>If building from source fails with Rust version errors:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Update Rust</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>rustup<span class="w"> </span>update<span class="w"> </span>stable
-</code></pre></div>
-<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
-<p>Now that PyRust is installed, check out:</p>
+<p><strong>Technology:</strong> Pure Python with PyO3 bindings</p>
+<h3 id="2-rust-core">2. Rust Core<a class="headerlink" href="#2-rust-core" title="Permanent link">&para;</a></h3>
+<p><strong>Location:</strong> <code>src/</code></p>
+<p>The Rust core handles all computation:</p>
 <ul>
-<li><a href="../quickstart/">Quick Start Tutorial</a> - Write your first PyRust program</li>
-<li><a href="../basic-operations/">Basic Operations</a> - Learn common data operations</li>
-<li><a href="../../api/dataframe/">API Reference</a> - Explore the full API</li>
+<li><strong>PyO3 Wrappers</strong> (<code>src/dataframe/mod.rs</code>) - Python↔Rust bridge</li>
+<li><strong>Query Execution</strong> - Powered by DataFusion</li>
+<li><strong>Memory Management</strong> - Safe, zero-copy operations</li>
+</ul>
+<p><strong>Technology:</strong> Rust, DataFusion, Arrow</p>
+<h3 id="3-apache-arrow">3. Apache Arrow<a class="headerlink" href="#3-apache-arrow" title="Permanent link">&para;</a></h3>
+<p>DataFusion uses Apache Arrow for:</p>
+<ul>
+<li><strong>Columnar Storage</strong> - Efficient memory layout</li>
+<li><strong>Zero-Copy</strong> - Data shared between Python and Rust</li>
+<li><strong>Vectorization</strong> - SIMD operations for speed</li>
+</ul>
+<h2 id="data-flow">Data Flow<a class="headerlink" href="#data-flow" title="Permanent link">&para;</a></h2>
+<h3 id="query-execution">Query Execution<a class="headerlink" href="#query-execution" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>1. Python API Call
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>   df.filter(&quot;age &gt; 18&quot;).select(&quot;name&quot;)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        ↓
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>2. PyO3 Binding
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>   Rust receives DataFrame + operations
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        ↓
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>3. DataFusion Query Plan
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>   Builds logical plan → optimizes
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        ↓
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>4. Physical Execution
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>   Executes on Arrow data
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        ↓
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>5. Return to Python
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>   Arrow → Python via zero-copy
+</code></pre></div>
+<h3 id="example-flow">Example Flow<a class="headerlink" href="#example-flow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 1. Python call</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;data.csv&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">&quot;age &gt; 18&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># 2. Rust receives:</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># - CSV path</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># - Filter expression: &quot;age &gt; 18&quot;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># - Columns: [&quot;name&quot;, &quot;city&quot;]</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># 3. DataFusion:</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># - Reads CSV to Arrow</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="c1"># - Applies filter (predicate pushdown)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c1"># - Projects columns (column pruning)</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c1"># - Returns Arrow batches</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="c1"># 4. Python receives Arrow data (zero-copy)</span>
+</code></pre></div>
+<h2 id="design-principles">Design Principles<a class="headerlink" href="#design-principles" title="Permanent link">&para;</a></h2>
+<h3 id="1-lazy-evaluation">1. Lazy Evaluation<a class="headerlink" href="#1-lazy-evaluation" title="Permanent link">&para;</a></h3>
+<p>Transformations are lazy - they build a plan without executing:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># These don&#39;t execute yet</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">&quot;age &gt; 18&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">df3</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># Action triggers execution</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">df3</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># Now it executes</span>
+</code></pre></div>
+<h3 id="2-immutability">2. Immutability<a class="headerlink" href="#2-immutability" title="Permanent link">&para;</a></h3>
+<p>DataFrames are immutable - operations return new DataFrames:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">df1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;data.csv&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">df2</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">&quot;age &gt; 18&quot;</span><span class="p">)</span>  <span class="c1"># df1 unchanged</span>
+</code></pre></div>
+<h3 id="3-zero-copy">3. Zero-Copy<a class="headerlink" href="#3-zero-copy" title="Permanent link">&para;</a></h3>
+<p>Data is shared between Python and Rust without copying:</p>
+<ul>
+<li>Arrow format in Rust</li>
+<li>Same Arrow format in Python</li>
+<li>No serialization overhead</li>
+</ul>
+<h3 id="4-type-safety">4. Type Safety<a class="headerlink" href="#4-type-safety" title="Permanent link">&para;</a></h3>
+<p>Rust's type system prevents many runtime errors:</p>
+<ul>
+<li>Schema validation at compile time</li>
+<li>Safe memory management</li>
+<li>No null pointer errors</li>
+</ul>
+<h2 id="performance-characteristics">Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Permanent link">&para;</a></h2>
+<h3 id="strengths">Strengths<a class="headerlink" href="#strengths" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Columnar Processing</strong> - Efficient cache usage</li>
+<li><strong>Vectorization</strong> - SIMD operations</li>
+<li><strong>No GC Pauses</strong> - Rust's ownership model</li>
+<li><strong>Predicate Pushdown</strong> - Filter early</li>
+<li><strong>Column Pruning</strong> - Read only needed columns</li>
+</ol>
+<h3 id="comparison">Comparison<a class="headerlink" href="#comparison" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>PySpark</th>
+<th>PyRust</th>
+<th>Speedup</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSV Read</td>
+<td>1.0x</td>
+<td>2-3x</td>
+<td>2-3x faster</td>
+</tr>
+<tr>
+<td>Filter</td>
+<td>1.0x</td>
+<td>3-5x</td>
+<td>3-5x faster</td>
+</tr>
+<tr>
+<td>GroupBy</td>
+<td>1.0x</td>
+<td>2-4x</td>
+<td>2-4x faster</td>
+</tr>
+<tr>
+<td>Join</td>
+<td>1.0x</td>
+<td>2-3x</td>
+<td>2-3x faster</td>
+</tr>
+</tbody>
+</table>
+<p><em>Benchmarks on CPU-bound operations with medium datasets</em></p>
+<h2 id="memory-model">Memory Model<a class="headerlink" href="#memory-model" title="Permanent link">&para;</a></h2>
+<h3 id="arrow-columnar-format">Arrow Columnar Format<a class="headerlink" href="#arrow-columnar-format" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Traditional Row Format:
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>[{id:1, name:&quot;Alice&quot;, age:25}, {id:2, name:&quot;Bob&quot;, age:30}, ...]
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>Arrow Column Format:
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>ids:   [1, 2, 3, ...]
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>names: [&quot;Alice&quot;, &quot;Bob&quot;, &quot;Charlie&quot;, ...]
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>ages:  [25, 30, 35, ...]
+</code></pre></div>
+<p><strong>Benefits:</strong>
+- Better cache locality
+- Vectorized operations
+- Compression-friendly</p>
+<h3 id="reference-counting">Reference Counting<a class="headerlink" href="#reference-counting" title="Permanent link">&para;</a></h3>
+<p>DataFrames use <code>Arc&lt;&gt;</code> for cheap cloning:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">PyDataFrame</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="n">df</span><span class="p">:</span><span class="w"> </span><span class="nc">Arc</span><span class="o">&lt;</span><span class="n">DataFrame</span><span class="o">&gt;</span><span class="p">,</span><span class="w">  </span><span class="c1">// Shared reference</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Multiple Python DataFrames can reference same data.</p>
+<h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../rust-core/">Rust Core</a> - Rust implementation details</li>
+<li><a href="../python-bindings/">Python Bindings</a> - PyO3 integration</li>
+<li><a href="../../user-guide/performance/">Performance Tips</a></li>
 </ul>
 
 
