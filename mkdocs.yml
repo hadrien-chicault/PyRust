@@ -6,8 +6,8 @@ repo_name: hadrien-chicault/PyRust
 
 theme:
   name: material
-  logo: icon/Pyrust_iconpng.png
-  favicon: icon/Pyrust_iconpng.png
+  logo: assets/Pyrust_iconpng.png
+  favicon: assets/Pyrust_iconpng.png
   palette:
     # Light mode
     - media: "(prefers-color-scheme: light)"

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="icon/Pyrust_iconpng.png" alt="PyRust Logo" width="200"/>
+  <img src="assets/Pyrust_iconpng.png" alt="PyRust Logo" width="200"/>
 </p>
 
 # PyRust Documentation
