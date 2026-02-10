@@ -85,7 +85,7 @@ class DataFrame:
         >>> df.groupBy("city", "country").agg([("age", "avg")])
         """
         rust_grouped = self._rust_df.groupBy(list(cols))
-        return GroupedData(rust_grouped)
+        return GroupedData(rust_grouped, session=self._session)
 
     def orderBy(self, *cols: str) -> "DataFrame":
         """
@@ -378,6 +378,50 @@ class DataFrame:
         """Alias for exceptAll()."""
         return self.exceptAll(other)
 
+    def withColumnRenamed(self, existing: str, new: str) -> "DataFrame":
+        """
+        Rename a column in the DataFrame.
+
+        Returns a new DataFrame with one column renamed. All other columns
+        remain unchanged.
+
+        Parameters
+        ----------
+        existing : str
+            The current name of the column to rename
+        new : str
+            The new name for the column
+
+        Returns
+        -------
+        DataFrame
+            A new DataFrame with the column renamed
+
+        Examples
+        --------
+        >>> # Rename a single column
+        >>> df = df.withColumnRenamed("old_name", "new_name")
+
+        >>> # Chain multiple renames
+        >>> df = df.withColumnRenamed("col1", "column_one") \\
+        ...        .withColumnRenamed("col2", "column_two")
+
+        >>> # Make column name more descriptive
+        >>> df = df.withColumnRenamed("age", "user_age")
+
+        Notes
+        -----
+        - Raises an error if the existing column doesn't exist
+        - Raises an error if the new name already exists
+        - Use select() to rename multiple columns at once
+        """
+        rust_df = self._rust_df.withColumnRenamed(existing, new)
+        return DataFrame(rust_df, session=self._session)
+
+    def with_column_renamed(self, existing: str, new: str) -> "DataFrame":
+        """Snake_case alias for withColumnRenamed()."""
+        return self.withColumnRenamed(existing, new)
+
     def count(self) -> int:
         """
         Count the number of rows.
@@ -474,8 +518,9 @@ class GroupedData:
     >>> grouped.agg([("age", "avg"), ("salary", "sum")])
     """
 
-    def __init__(self, rust_grouped):
+    def __init__(self, rust_grouped, session=None):
         self._rust_grouped = rust_grouped
+        self._session = session
 
     def count(self) -> DataFrame:
         """

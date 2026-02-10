@@ -75,6 +75,7 @@ nav:
       - DataFrame API: user-guide/dataframe.md
       - Data Loading: user-guide/data-loading.md
       - Transformations: user-guide/transformations.md
+      - Column Operations: user-guide/column-operations.md
       - Data Operations: user-guide/set-operations.md
       - SQL Queries: user-guide/sql-queries.md
       - Performance Tips: user-guide/performance.md

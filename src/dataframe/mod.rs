@@ -829,6 +829,88 @@ impl PyDataFrame {
         Ok(PyDataFrame::new(df))
     }
 
+    /// Renames a column in the DataFrame.
+    ///
+    /// Returns a new DataFrame with one column renamed. All other columns remain unchanged.
+    ///
+    /// # Arguments
+    ///
+    /// * `existing` - The current name of the column to rename
+    /// * `new` - The new name for the column
+    ///
+    /// # Returns
+    ///
+    /// A new DataFrame with the column renamed.
+    ///
+    /// # Errors
+    ///
+    /// Returns a `PyRuntimeError` if:
+    /// - The column `existing` does not exist in the DataFrame
+    /// - The new column name already exists (would create duplicates)
+    ///
+    /// # Examples
+    ///
+    /// ```python
+    /// # Rename single column
+    /// df = df.withColumnRenamed("old_name", "new_name")
+    ///
+    /// # Chain multiple renames
+    /// df = df.withColumnRenamed("col1", "column_one") \
+    ///        .withColumnRenamed("col2", "column_two")
+    ///
+    /// # Rename to make column name more descriptive
+    /// df = df.withColumnRenamed("age", "user_age")
+    /// ```
+    ///
+    /// # See Also
+    ///
+    /// - [`select`](#method.select) - Select and rename columns at once
+    #[allow(non_snake_case)]
+    fn withColumnRenamed(&self, existing: &str, new: &str) -> PyResult<Self> {
+        let rt = Self::runtime()?;
+
+        let df = rt
+            .block_on(async {
+                let schema = self.df.schema();
+
+                // Check if the existing column exists
+                let exists = schema.fields().iter().any(|f| f.name() == existing);
+                if !exists {
+                    return Err(datafusion::error::DataFusionError::Plan(format!(
+                        "Column '{}' does not exist in DataFrame",
+                        existing
+                    )));
+                }
+
+                // Check if the new name already exists
+                let new_exists = schema.fields().iter().any(|f| f.name() == new);
+                if new_exists {
+                    return Err(datafusion::error::DataFusionError::Plan(format!(
+                        "Column '{}' already exists in DataFrame",
+                        new
+                    )));
+                }
+
+                // Create select expressions with renamed column
+                let select_exprs: Vec<Expr> = schema
+                    .fields()
+                    .iter()
+                    .map(|field| {
+                        if field.name() == existing {
+                            col(existing).alias(new)
+                        } else {
+                            col(field.name())
+                        }
+                    })
+                    .collect();
+
+                self.clone_df().select(select_exprs)
+            })
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to rename column: {}", e)))?;
+
+        Ok(PyDataFrame::new(df))
+    }
+
     /// Counts the number of rows in the DataFrame.
     ///
     /// This is an **action** (eager operation) that triggers execution of the
