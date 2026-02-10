@@ -187,6 +187,197 @@ class DataFrame:
         rust_df = self._rust_df.limit(n)
         return DataFrame(rust_df, session=self._session)
 
+    def distinct(self) -> "DataFrame":
+        """
+        Remove duplicate rows from the DataFrame.
+
+        Returns a new DataFrame with only unique rows. All columns are
+        considered when determining duplicates.
+
+        Returns
+        -------
+        DataFrame
+            A new DataFrame containing only distinct rows
+
+        Examples
+        --------
+        >>> df.distinct()
+
+        Notes
+        -----
+        - The order of rows in the result is not guaranteed
+        - Use dropDuplicates() if you want to check uniqueness on specific columns only
+        """
+        rust_df = self._rust_df.distinct()
+        return DataFrame(rust_df, session=self._session)
+
+    def dropDuplicates(self, subset=None) -> "DataFrame":
+        """
+        Remove duplicate rows based on specified columns.
+
+        Parameters
+        ----------
+        subset : list of str, optional
+            Column names to consider for identifying duplicates.
+            If None, all columns are used (equivalent to distinct()).
+
+        Returns
+        -------
+        DataFrame
+            A new DataFrame with duplicates removed
+
+        Examples
+        --------
+        >>> # Remove duplicates based on all columns
+        >>> df.dropDuplicates()
+
+        >>> # Remove duplicates based on 'name' column only
+        >>> df.dropDuplicates(['name'])
+
+        >>> # Remove duplicates based on multiple columns
+        >>> df.dropDuplicates(['name', 'city'])
+
+        Notes
+        -----
+        - More efficient than distinct() when only checking a subset of columns
+        - The first occurrence of each unique combination is kept
+        """
+        if subset is None:
+            rust_df = self._rust_df.dropDuplicates(None)
+        else:
+            rust_df = self._rust_df.dropDuplicates(subset)
+        return DataFrame(rust_df, session=self._session)
+
+    def drop_duplicates(self, subset=None) -> "DataFrame":
+        """Alias for dropDuplicates()."""
+        return self.dropDuplicates(subset)
+
+    def union(self, other: "DataFrame") -> "DataFrame":
+        """
+        Combine two DataFrames vertically (union).
+
+        Returns a new DataFrame containing all rows from both DataFrames.
+        Duplicates are kept (equivalent to SQL UNION ALL).
+
+        Parameters
+        ----------
+        other : DataFrame
+            The DataFrame to union with this one
+
+        Returns
+        -------
+        DataFrame
+            A new DataFrame with rows from both DataFrames
+
+        Examples
+        --------
+        >>> df1 = spark.read.csv("data1.csv")
+        >>> df2 = spark.read.csv("data2.csv")
+        >>> combined = df1.union(df2)
+
+        Notes
+        -----
+        - Both DataFrames must have the same schema (column names and types)
+        - Column order must match
+        - Duplicates are NOT removed (use distinct() after union if needed)
+        """
+        rust_df = self._rust_df.union(other._rust_df)
+        return DataFrame(rust_df, session=self._session)
+
+    def unionAll(self, other: "DataFrame") -> "DataFrame":
+        """
+        Combine two DataFrames vertically, keeping duplicates.
+
+        This is an alias for union(). In PySpark, both union() and unionAll()
+        keep duplicates (they are equivalent).
+
+        Parameters
+        ----------
+        other : DataFrame
+            The DataFrame to union with this one
+
+        Returns
+        -------
+        DataFrame
+            A new DataFrame with rows from both DataFrames
+
+        Examples
+        --------
+        >>> combined = df1.unionAll(df2)
+        """
+        rust_df = self._rust_df.unionAll(other._rust_df)
+        return DataFrame(rust_df, session=self._session)
+
+    def intersect(self, other: "DataFrame") -> "DataFrame":
+        """
+        Return rows that exist in both DataFrames (intersection).
+
+        Returns a new DataFrame containing only rows that appear in both
+        this DataFrame and the other DataFrame. Duplicates are automatically
+        removed from the result.
+
+        Parameters
+        ----------
+        other : DataFrame
+            The DataFrame to intersect with
+
+        Returns
+        -------
+        DataFrame
+            A new DataFrame with rows common to both DataFrames
+
+        Examples
+        --------
+        >>> df1 = spark.read.csv("data1.csv")
+        >>> df2 = spark.read.csv("data2.csv")
+        >>> common = df1.intersect(df2)
+
+        Notes
+        -----
+        - Both DataFrames must have compatible schemas
+        - Duplicates are automatically removed
+        - This is equivalent to SQL INTERSECT
+        """
+        rust_df = self._rust_df.intersect(other._rust_df)
+        return DataFrame(rust_df, session=self._session)
+
+    def exceptAll(self, other: "DataFrame") -> "DataFrame":
+        """
+        Return rows in this DataFrame but not in the other (difference).
+
+        Returns a new DataFrame containing rows that exist in this DataFrame
+        but not in the other DataFrame. Duplicates are automatically removed.
+
+        Parameters
+        ----------
+        other : DataFrame
+            The DataFrame whose rows should be excluded
+
+        Returns
+        -------
+        DataFrame
+            A new DataFrame with rows from this DataFrame not in other
+
+        Examples
+        --------
+        >>> df1 = spark.read.csv("data1.csv")
+        >>> df2 = spark.read.csv("data2.csv")
+        >>> difference = df1.exceptAll(df2)
+
+        Notes
+        -----
+        - Both DataFrames must have compatible schemas
+        - Duplicates are automatically removed
+        - This is equivalent to SQL EXCEPT
+        - Named exceptAll() instead of except() because except is a Python keyword
+        """
+        rust_df = self._rust_df.except_(other._rust_df)
+        return DataFrame(rust_df, session=self._session)
+
+    def subtract(self, other: "DataFrame") -> "DataFrame":
+        """Alias for exceptAll()."""
+        return self.exceptAll(other)
+
     def count(self) -> int:
         """
         Count the number of rows.

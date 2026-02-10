@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="icon/Pyrust_iconpng.png" alt="PyRust Logo" width="200"/>
+</p>
+
 # PyRust 🚀
 
 **A Rust-based implementation of PySpark for high-performance distributed computing**

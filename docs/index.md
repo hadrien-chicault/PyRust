@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="icon/Pyrust_iconpng.png" alt="PyRust Logo" width="200"/>
+</p>
+
 # PyRust Documentation
 
 Welcome to **PyRust** - a high-performance, Rust-based implementation of PySpark that delivers 10-50x faster data processing while maintaining API compatibility.
