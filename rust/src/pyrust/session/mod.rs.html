@@ -455,34 +455,156 @@
 <a href=#455 id=455 data-nosnippet>455</a>        ))
 <a href=#456 id=456 data-nosnippet>456</a>    }
 <a href=#457 id=457 data-nosnippet>457</a>
-<a href=#458 id=458 data-nosnippet>458</a>    <span class="doccomment">/// Stops the SparkSession and releases resources.
+<a href=#458 id=458 data-nosnippet>458</a>    <span class="doccomment">/// Executes a SQL query and returns the result as a DataFrame.
 <a href=#459 id=459 data-nosnippet>459</a>    ///
-<a href=#460 id=460 data-nosnippet>460</a>    /// **Note**: In the current implementation, this is a no-op. Future versions
-<a href=#461 id=461 data-nosnippet>461</a>    /// will properly clean up resources such as:
-<a href=#462 id=462 data-nosnippet>462</a>    /// - Thread pools
-<a href=#463 id=463 data-nosnippet>463</a>    /// - Cached data
-<a href=#464 id=464 data-nosnippet>464</a>    /// - Temporary files
-<a href=#465 id=465 data-nosnippet>465</a>    /// - Network connections
-<a href=#466 id=466 data-nosnippet>466</a>    ///
-<a href=#467 id=467 data-nosnippet>467</a>    /// # Example
-<a href=#468 id=468 data-nosnippet>468</a>    ///
-<a href=#469 id=469 data-nosnippet>469</a>    /// ```python
-<a href=#470 id=470 data-nosnippet>470</a>    /// spark = SparkSession.builder().appName("MyApp").getOrCreate()
-<a href=#471 id=471 data-nosnippet>471</a>    /// # ... use spark ...
-<a href=#472 id=472 data-nosnippet>472</a>    /// spark.stop()  # Clean up
-<a href=#473 id=473 data-nosnippet>473</a>    /// ```
-<a href=#474 id=474 data-nosnippet>474</a>    </span><span class="kw">fn </span>stop(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-<a href=#475 id=475 data-nosnippet>475</a>        <span class="comment">// In the POC, this is a no-op
-<a href=#476 id=476 data-nosnippet>476</a>        // In future versions, this would clean up resources
-<a href=#477 id=477 data-nosnippet>477</a>    </span>}
-<a href=#478 id=478 data-nosnippet>478</a>
-<a href=#479 id=479 data-nosnippet>479</a>    <span class="doccomment">/// Returns a string representation of the SparkSession.
-<a href=#480 id=480 data-nosnippet>480</a>    ///
-<a href=#481 id=481 data-nosnippet>481</a>    /// # Returns
-<a href=#482 id=482 data-nosnippet>482</a>    ///
-<a href=#483 id=483 data-nosnippet>483</a>    /// A string showing the session type and application name.
-<a href=#484 id=484 data-nosnippet>484</a>    </span><span class="kw">fn </span>__repr__(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String {
-<a href=#485 id=485 data-nosnippet>485</a>        <span class="macro">format!</span>(<span class="string">"&lt;SparkSession(app='{}')&gt;"</span>, <span class="self">self</span>.app_name)
-<a href=#486 id=486 data-nosnippet>486</a>    }
-<a href=#487 id=487 data-nosnippet>487</a>}
+<a href=#460 id=460 data-nosnippet>460</a>    /// This method allows you to run SQL queries directly, leveraging DataFusion's
+<a href=#461 id=461 data-nosnippet>461</a>    /// full SQL engine. It supports standard SQL syntax including SELECT, WHERE,
+<a href=#462 id=462 data-nosnippet>462</a>    /// GROUP BY, ORDER BY, joins, subqueries, and window functions.
+<a href=#463 id=463 data-nosnippet>463</a>    ///
+<a href=#464 id=464 data-nosnippet>464</a>    /// # Arguments
+<a href=#465 id=465 data-nosnippet>465</a>    ///
+<a href=#466 id=466 data-nosnippet>466</a>    /// * `query` - SQL query string to execute
+<a href=#467 id=467 data-nosnippet>467</a>    ///
+<a href=#468 id=468 data-nosnippet>468</a>    /// # Returns
+<a href=#469 id=469 data-nosnippet>469</a>    ///
+<a href=#470 id=470 data-nosnippet>470</a>    /// A DataFrame containing the query results.
+<a href=#471 id=471 data-nosnippet>471</a>    ///
+<a href=#472 id=472 data-nosnippet>472</a>    /// # SQL Support
+<a href=#473 id=473 data-nosnippet>473</a>    ///
+<a href=#474 id=474 data-nosnippet>474</a>    /// PyRust supports full ANSI SQL via DataFusion:
+<a href=#475 id=475 data-nosnippet>475</a>    /// - SELECT, WHERE, GROUP BY, HAVING, ORDER BY
+<a href=#476 id=476 data-nosnippet>476</a>    /// - Joins (INNER, LEFT, RIGHT, FULL, CROSS)
+<a href=#477 id=477 data-nosnippet>477</a>    /// - Subqueries and CTEs (WITH)
+<a href=#478 id=478 data-nosnippet>478</a>    /// - Window functions (ROW_NUMBER, RANK, etc.)
+<a href=#479 id=479 data-nosnippet>479</a>    /// - Aggregate functions (COUNT, SUM, AVG, MIN, MAX)
+<a href=#480 id=480 data-nosnippet>480</a>    /// - String, date, and math functions
+<a href=#481 id=481 data-nosnippet>481</a>    ///
+<a href=#482 id=482 data-nosnippet>482</a>    /// # Performance
+<a href=#483 id=483 data-nosnippet>483</a>    ///
+<a href=#484 id=484 data-nosnippet>484</a>    /// - SQL queries are optimized by DataFusion's query planner
+<a href=#485 id=485 data-nosnippet>485</a>    /// - Predicate pushdown and column pruning applied automatically
+<a href=#486 id=486 data-nosnippet>486</a>    /// - Vectorized execution for high performance
+<a href=#487 id=487 data-nosnippet>487</a>    ///
+<a href=#488 id=488 data-nosnippet>488</a>    /// # Errors
+<a href=#489 id=489 data-nosnippet>489</a>    ///
+<a href=#490 id=490 data-nosnippet>490</a>    /// Returns a `PyRuntimeError` if:
+<a href=#491 id=491 data-nosnippet>491</a>    /// - SQL syntax is invalid
+<a href=#492 id=492 data-nosnippet>492</a>    /// - Referenced tables/views don't exist
+<a href=#493 id=493 data-nosnippet>493</a>    /// - Query execution fails
+<a href=#494 id=494 data-nosnippet>494</a>    ///
+<a href=#495 id=495 data-nosnippet>495</a>    /// # Examples
+<a href=#496 id=496 data-nosnippet>496</a>    ///
+<a href=#497 id=497 data-nosnippet>497</a>    /// ```python
+<a href=#498 id=498 data-nosnippet>498</a>    /// # Simple SELECT
+<a href=#499 id=499 data-nosnippet>499</a>    /// df = spark.sql("SELECT name, age FROM users WHERE age &gt; 18")
+<a href=#500 id=500 data-nosnippet>500</a>    ///
+<a href=#501 id=501 data-nosnippet>501</a>    /// # With aggregation
+<a href=#502 id=502 data-nosnippet>502</a>    /// df = spark.sql(\"\"\"
+<a href=#503 id=503 data-nosnippet>503</a>    ///     SELECT city, COUNT(*) as count, AVG(age) as avg_age
+<a href=#504 id=504 data-nosnippet>504</a>    ///     FROM users
+<a href=#505 id=505 data-nosnippet>505</a>    ///     GROUP BY city
+<a href=#506 id=506 data-nosnippet>506</a>    ///     ORDER BY count DESC
+<a href=#507 id=507 data-nosnippet>507</a>    /// \"\"\")
+<a href=#508 id=508 data-nosnippet>508</a>    ///
+<a href=#509 id=509 data-nosnippet>509</a>    /// # With joins (requires temp views)
+<a href=#510 id=510 data-nosnippet>510</a>    /// users_df.createOrReplaceTempView("users")
+<a href=#511 id=511 data-nosnippet>511</a>    /// orders_df.createOrReplaceTempView("orders")
+<a href=#512 id=512 data-nosnippet>512</a>    /// df = spark.sql(\"\"\"
+<a href=#513 id=513 data-nosnippet>513</a>    ///     SELECT u.name, COUNT(o.id) as order_count
+<a href=#514 id=514 data-nosnippet>514</a>    ///     FROM users u
+<a href=#515 id=515 data-nosnippet>515</a>    ///     JOIN orders o ON u.id = o.user_id
+<a href=#516 id=516 data-nosnippet>516</a>    ///     GROUP BY u.name
+<a href=#517 id=517 data-nosnippet>517</a>    /// \"\"\")
+<a href=#518 id=518 data-nosnippet>518</a>    /// ```
+<a href=#519 id=519 data-nosnippet>519</a>    </span><span class="kw">fn </span>sql(<span class="kw-2">&amp;</span><span class="self">self</span>, query: <span class="kw-2">&amp;</span>str) -&gt; PyResult&lt;PyDataFrame&gt; {
+<a href=#520 id=520 data-nosnippet>520</a>        <span class="comment">// Use tokio runtime to execute async datafusion operations
+<a href=#521 id=521 data-nosnippet>521</a>        </span><span class="kw">let </span>rt = tokio::runtime::Runtime::new()
+<a href=#522 id=522 data-nosnippet>522</a>            .map_err(|e| PyRuntimeError::new_err(<span class="macro">format!</span>(<span class="string">"Failed to create runtime: {}"</span>, e)))<span class="question-mark">?</span>;
+<a href=#523 id=523 data-nosnippet>523</a>
+<a href=#524 id=524 data-nosnippet>524</a>        <span class="kw">let </span>df = rt
+<a href=#525 id=525 data-nosnippet>525</a>            .block_on(<span class="kw">async </span>{
+<a href=#526 id=526 data-nosnippet>526</a>                <span class="comment">// Execute SQL query via DataFusion
+<a href=#527 id=527 data-nosnippet>527</a>                </span><span class="self">self</span>.ctx.sql(query).<span class="kw">await
+<a href=#528 id=528 data-nosnippet>528</a>            </span>})
+<a href=#529 id=529 data-nosnippet>529</a>            .map_err(|e| PyRuntimeError::new_err(<span class="macro">format!</span>(<span class="string">"Failed to execute SQL: {}"</span>, e)))<span class="question-mark">?</span>;
+<a href=#530 id=530 data-nosnippet>530</a>
+<a href=#531 id=531 data-nosnippet>531</a>        <span class="prelude-val">Ok</span>(PyDataFrame::new(df))
+<a href=#532 id=532 data-nosnippet>532</a>    }
+<a href=#533 id=533 data-nosnippet>533</a>
+<a href=#534 id=534 data-nosnippet>534</a>    <span class="doccomment">/// Registers a DataFrame as a temporary view/table.
+<a href=#535 id=535 data-nosnippet>535</a>    ///
+<a href=#536 id=536 data-nosnippet>536</a>    /// This allows SQL queries to reference the DataFrame by name. The view is
+<a href=#537 id=537 data-nosnippet>537</a>    /// session-scoped and will be available until the session ends or the view
+<a href=#538 id=538 data-nosnippet>538</a>    /// is replaced.
+<a href=#539 id=539 data-nosnippet>539</a>    ///
+<a href=#540 id=540 data-nosnippet>540</a>    /// # Arguments
+<a href=#541 id=541 data-nosnippet>541</a>    ///
+<a href=#542 id=542 data-nosnippet>542</a>    /// * `df` - The DataFrame to register
+<a href=#543 id=543 data-nosnippet>543</a>    /// * `name` - The name to assign to the view
+<a href=#544 id=544 data-nosnippet>544</a>    ///
+<a href=#545 id=545 data-nosnippet>545</a>    /// # Errors
+<a href=#546 id=546 data-nosnippet>546</a>    ///
+<a href=#547 id=547 data-nosnippet>547</a>    /// Returns a `PyRuntimeError` if registration fails.
+<a href=#548 id=548 data-nosnippet>548</a>    ///
+<a href=#549 id=549 data-nosnippet>549</a>    /// # Example
+<a href=#550 id=550 data-nosnippet>550</a>    ///
+<a href=#551 id=551 data-nosnippet>551</a>    /// ```python
+<a href=#552 id=552 data-nosnippet>552</a>    /// df = spark.read.csv("users.csv")
+<a href=#553 id=553 data-nosnippet>553</a>    /// spark.register_temp_view(df, "users")
+<a href=#554 id=554 data-nosnippet>554</a>    /// result = spark.sql("SELECT * FROM users WHERE age &gt; 18")
+<a href=#555 id=555 data-nosnippet>555</a>    /// ```
+<a href=#556 id=556 data-nosnippet>556</a>    ///
+<a href=#557 id=557 data-nosnippet>557</a>    /// # Note
+<a href=#558 id=558 data-nosnippet>558</a>    ///
+<a href=#559 id=559 data-nosnippet>559</a>    /// This is a helper method. In PySpark, you would use `df.createOrReplaceTempView()`.
+<a href=#560 id=560 data-nosnippet>560</a>    /// For API compatibility, use the Python wrapper which delegates to this method.
+<a href=#561 id=561 data-nosnippet>561</a>    </span><span class="kw">fn </span>register_temp_view(<span class="kw-2">&amp;</span><span class="self">self</span>, df: <span class="kw-2">&amp;</span>PyDataFrame, name: <span class="kw-2">&amp;</span>str) -&gt; PyResult&lt;()&gt; {
+<a href=#562 id=562 data-nosnippet>562</a>        <span class="kw">let </span>rt = tokio::runtime::Runtime::new()
+<a href=#563 id=563 data-nosnippet>563</a>            .map_err(|e| PyRuntimeError::new_err(<span class="macro">format!</span>(<span class="string">"Failed to create runtime: {}"</span>, e)))<span class="question-mark">?</span>;
+<a href=#564 id=564 data-nosnippet>564</a>
+<a href=#565 id=565 data-nosnippet>565</a>        rt.block_on(<span class="kw">async </span>{
+<a href=#566 id=566 data-nosnippet>566</a>            <span class="comment">// First, deregister any existing table with this name (ignore errors if doesn't exist)
+<a href=#567 id=567 data-nosnippet>567</a>            </span><span class="kw">let _ </span>= <span class="self">self</span>.ctx.deregister_table(name);
+<a href=#568 id=568 data-nosnippet>568</a>
+<a href=#569 id=569 data-nosnippet>569</a>            <span class="comment">// Now register the new table
+<a href=#570 id=570 data-nosnippet>570</a>            </span><span class="self">self</span>.ctx
+<a href=#571 id=571 data-nosnippet>571</a>                .register_table(name, df.inner_df().as_ref().clone().into_view())
+<a href=#572 id=572 data-nosnippet>572</a>        })
+<a href=#573 id=573 data-nosnippet>573</a>        .map_err(|e| {
+<a href=#574 id=574 data-nosnippet>574</a>            PyRuntimeError::new_err(<span class="macro">format!</span>(<span class="string">"Failed to register temp view '{}': {}"</span>, name, e))
+<a href=#575 id=575 data-nosnippet>575</a>        })<span class="question-mark">?</span>;
+<a href=#576 id=576 data-nosnippet>576</a>
+<a href=#577 id=577 data-nosnippet>577</a>        <span class="prelude-val">Ok</span>(())
+<a href=#578 id=578 data-nosnippet>578</a>    }
+<a href=#579 id=579 data-nosnippet>579</a>
+<a href=#580 id=580 data-nosnippet>580</a>    <span class="doccomment">/// Stops the SparkSession and releases resources.
+<a href=#581 id=581 data-nosnippet>581</a>    ///
+<a href=#582 id=582 data-nosnippet>582</a>    /// **Note**: In the current implementation, this is a no-op. Future versions
+<a href=#583 id=583 data-nosnippet>583</a>    /// will properly clean up resources such as:
+<a href=#584 id=584 data-nosnippet>584</a>    /// - Thread pools
+<a href=#585 id=585 data-nosnippet>585</a>    /// - Cached data
+<a href=#586 id=586 data-nosnippet>586</a>    /// - Temporary files
+<a href=#587 id=587 data-nosnippet>587</a>    /// - Network connections
+<a href=#588 id=588 data-nosnippet>588</a>    ///
+<a href=#589 id=589 data-nosnippet>589</a>    /// # Example
+<a href=#590 id=590 data-nosnippet>590</a>    ///
+<a href=#591 id=591 data-nosnippet>591</a>    /// ```python
+<a href=#592 id=592 data-nosnippet>592</a>    /// spark = SparkSession.builder().appName("MyApp").getOrCreate()
+<a href=#593 id=593 data-nosnippet>593</a>    /// # ... use spark ...
+<a href=#594 id=594 data-nosnippet>594</a>    /// spark.stop()  # Clean up
+<a href=#595 id=595 data-nosnippet>595</a>    /// ```
+<a href=#596 id=596 data-nosnippet>596</a>    </span><span class="kw">fn </span>stop(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<a href=#597 id=597 data-nosnippet>597</a>        <span class="comment">// In the POC, this is a no-op
+<a href=#598 id=598 data-nosnippet>598</a>        // In future versions, this would clean up resources
+<a href=#599 id=599 data-nosnippet>599</a>    </span>}
+<a href=#600 id=600 data-nosnippet>600</a>
+<a href=#601 id=601 data-nosnippet>601</a>    <span class="doccomment">/// Returns a string representation of the SparkSession.
+<a href=#602 id=602 data-nosnippet>602</a>    ///
+<a href=#603 id=603 data-nosnippet>603</a>    /// # Returns
+<a href=#604 id=604 data-nosnippet>604</a>    ///
+<a href=#605 id=605 data-nosnippet>605</a>    /// A string showing the session type and application name.
+<a href=#606 id=606 data-nosnippet>606</a>    </span><span class="kw">fn </span>__repr__(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String {
+<a href=#607 id=607 data-nosnippet>607</a>        <span class="macro">format!</span>(<span class="string">"&lt;SparkSession(app='{}')&gt;"</span>, <span class="self">self</span>.app_name)
+<a href=#608 id=608 data-nosnippet>608</a>    }
+<a href=#609 id=609 data-nosnippet>609</a>}
 </code></pre></div></section></main></body></html>
