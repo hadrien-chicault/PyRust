@@ -31,6 +31,7 @@
 
 use datafusion::arrow::util::pretty;
 use datafusion::functions_aggregate::expr_fn::{avg, count, max, min, sum};
+use datafusion::logical_expr::JoinType;
 use datafusion::prelude::*;
 use pyo3::exceptions::PyRuntimeError;
 use pyo3::prelude::*;
@@ -730,6 +731,139 @@ impl PyDataFrame {
             );
         }
         Ok(())
+    }
+
+    /// Joins this DataFrame with another DataFrame.
+    ///
+    /// This operation combines rows from two DataFrames based on a join condition.
+    /// Supports all standard SQL join types.
+    ///
+    /// # Arguments
+    ///
+    /// * `other` - The DataFrame to join with
+    /// * `on` - Column name(s) to join on
+    /// * `how` - Join type: "inner", "left", "right", "outer", "cross" (default: "inner")
+    ///
+    /// # Join Types
+    ///
+    /// - **inner**: Returns rows that have matching values in both DataFrames
+    /// - **left**: Returns all rows from left DataFrame, matched rows from right
+    /// - **right**: Returns all rows from right DataFrame, matched rows from left
+    /// - **outer** / **full**: Returns all rows from both DataFrames
+    /// - **semi**: Returns rows from left that have matches in right (no right columns)
+    /// - **anti**: Returns rows from left that have NO matches in right
+    ///
+    /// # Returns
+    ///
+    /// A new DataFrame containing the joined result.
+    ///
+    /// # Performance
+    ///
+    /// - Hash join is used for equality conditions (very efficient)
+    /// - Semi/anti joins are faster than full joins (no right columns returned)
+    /// - Consider filtering before joining to reduce data size
+    ///
+    /// # Errors
+    ///
+    /// Returns a `PyRuntimeError` if:
+    /// - Join columns don't exist
+    /// - Join type is invalid
+    /// - Query execution fails
+    ///
+    /// # Examples
+    ///
+    /// ```python
+    /// # Inner join on single column
+    /// result = df1.join(df2, on=["user_id"])
+    ///
+    /// # Left join on single column
+    /// result = df1.join(df2, on=["user_id"], how="left")
+    ///
+    /// # Join on multiple columns
+    /// result = df1.join(df2, on=["country", "city"])
+    ///
+    /// # Semi join (only left columns, where match exists)
+    /// result = df1.join(df2, on=["user_id"], how="semi")
+    /// ```
+    #[pyo3(signature = (other, on=None, how="inner"))]
+    fn join(&self, other: &PyDataFrame, on: Option<Vec<String>>, how: &str) -> PyResult<Self> {
+        let rt = Self::runtime()?;
+
+        // Parse join type
+        let join_type = match how.to_lowercase().as_str() {
+            "inner" => JoinType::Inner,
+            "left" => JoinType::Left,
+            "right" => JoinType::Right,
+            "outer" | "full" => JoinType::Full,
+            "semi" => JoinType::LeftSemi,
+            "anti" => JoinType::LeftAnti,
+            _ => {
+                return Err(PyRuntimeError::new_err(format!(
+                    "Invalid join type '{}'. Must be one of: inner, left, right, outer/full, semi, anti",
+                    how
+                )))
+            }
+        };
+
+        let df = rt
+            .block_on(async {
+                let left_df = self.clone_df();
+                let right_df = other.clone_df();
+
+                // All joins need join keys
+                let join_keys = on.ok_or_else(|| {
+                    datafusion::error::DataFusionError::Plan(
+                        "Join keys required. Use 'on' parameter with column name(s).".to_string(),
+                    )
+                })?;
+
+                if join_keys.is_empty() {
+                    return Err(datafusion::error::DataFusionError::Plan(
+                        "At least one join key is required".to_string(),
+                    ));
+                }
+
+                // Convert to slices for DataFusion's join API
+                let left_keys: Vec<&str> = join_keys.iter().map(|s| s.as_str()).collect();
+                let right_keys: Vec<&str> = join_keys.iter().map(|s| s.as_str()).collect();
+
+                // Perform the join
+                let joined = left_df.join(right_df, join_type, &left_keys, &right_keys, None)?;
+
+                // Get all column names from the joined DataFrame
+                let schema = joined.schema();
+                let all_cols: Vec<Expr> = schema
+                    .fields()
+                    .iter()
+                    .enumerate()
+                    .filter_map(|(idx, field)| {
+                        let name = field.name();
+                        // Skip duplicate join key columns (they appear twice)
+                        // Keep only the first occurrence
+                        if join_keys.contains(&name.to_string()) {
+                            // Check if this is the first occurrence
+                            let first_idx = schema
+                                .fields()
+                                .iter()
+                                .position(|f| f.name() == name)
+                                .unwrap();
+                            if idx == first_idx {
+                                Some(col(name))
+                            } else {
+                                None // Skip duplicate
+                            }
+                        } else {
+                            Some(col(name))
+                        }
+                    })
+                    .collect();
+
+                // Select to remove duplicate columns
+                joined.select(all_cols)
+            })
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to join DataFrames: {}", e)))?;
+
+        Ok(PyDataFrame::new(df))
     }
 
     /// Returns a string representation of the DataFrame.

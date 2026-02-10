@@ -112,6 +112,59 @@ class DataFrame:
         """Alias for orderBy()."""
         return self.orderBy(*cols)
 
+    def join(self, other: "DataFrame", on=None, how: str = "inner") -> "DataFrame":
+        """
+        Join this DataFrame with another DataFrame.
+
+        Parameters
+        ----------
+        other : DataFrame
+            The right DataFrame to join with
+        on : str, list of str, optional
+            Column name(s) to join on. Can be a single column name or list of column names.
+            Both DataFrames must have these columns.
+        how : str, optional
+            Type of join to perform (default: "inner")
+            Supported types:
+            - "inner": Inner join (default)
+            - "left": Left outer join
+            - "right": Right outer join
+            - "outer" or "full": Full outer join
+            - "semi": Left semi join (only left columns where match exists)
+            - "anti": Left anti join (only left columns where NO match exists)
+
+        Returns
+        -------
+        DataFrame
+            A new DataFrame containing the joined result
+
+        Examples
+        --------
+        >>> # Inner join on single column
+        >>> result = df1.join(df2, on="user_id")
+
+        >>> # Left join on single column
+        >>> result = df1.join(df2, on="user_id", how="left")
+
+        >>> # Join on multiple columns
+        >>> result = df1.join(df2, on=["country", "city"])
+
+        >>> # Semi join (filtering)
+        >>> result = df1.join(df2, on="user_id", how="semi")
+
+        Notes
+        -----
+        - For best performance, filter DataFrames before joining
+        - Semi and anti joins are more efficient than full joins for filtering operations
+        - The join columns must exist in both DataFrames
+        """
+        # Convert single string to list
+        if isinstance(on, str):
+            on = [on]
+
+        rust_df = self._rust_df.join(other._rust_df, on=on, how=how)
+        return DataFrame(rust_df)
+
     def limit(self, n: int) -> "DataFrame":
         """
         Limit the number of rows.
