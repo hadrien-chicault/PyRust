@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../dataframe/">
+        <link rel="prev" href="../transformations/">
       
       
-        <link rel="next" href="../transformations/">
+        <link rel="next" href="../set-operations/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Data Loading - PyRust Documentation</title>
+        <title>Column Operations - PyRust Documentation</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#data-loading-guide" class="md-skip">
+        <a href="#column-operations" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Data Loading
+              Column Operations
             
           </span>
         </div>
@@ -648,37 +648,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Data Loading
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../data-loading/" class="md-nav__link">
         
   
   
@@ -694,298 +667,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#supported-formats" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Supported Formats
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#csv-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CSV Files
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="CSV Files">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#basic-csv-loading" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Basic CSV Loading
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#csv-options" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CSV Options
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#schema-inference" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Schema Inference
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#performance-tips-for-csv" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Performance Tips for CSV
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parquet-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parquet Files
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Parquet Files">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#basic-parquet-loading" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Basic Parquet Loading
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-parquet" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why Parquet?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#parquet-partitioning" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parquet Partitioning
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#file-path-patterns" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        File Path Patterns
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="File Path Patterns">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#local-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Local Files
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multiple-files-future" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Multiple Files (Future)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#data-sources-best-practices" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Data Sources Best Practices
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Data Sources Best Practices">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-choose-the-right-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Choose the Right Format
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-optimize-csv-reading" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Optimize CSV Reading
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-leverage-parquet-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Leverage Parquet Features
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#common-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Common Issues
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Common Issues">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#issue-1-file-not-found" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Issue 1: File Not Found
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#issue-2-encoding-problems" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Issue 2: Encoding Problems
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#issue-3-large-file-memory" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Issue 3: Large File Memory
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Next Steps
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1023,10 +704,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../column-operations/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Column Operations
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1042,6 +750,281 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#renaming-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Renaming Columns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Renaming Columns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#withcolumnrenamed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        withColumnRenamed()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#standardizing-column-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standardizing Column Names
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preparing-for-joins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preparing for Joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#making-names-more-descriptive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Making Names More Descriptive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixing-typos-or-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixing Typos or Case
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-with-other-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration with Other Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration with Other Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#with-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        With Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        With Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        With Sorting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        With Aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-joins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        With Joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Handling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#column-doesnt-exist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Column Doesn't Exist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#target-name-already-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Target Name Already Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Tips
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#method-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Aliases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future Enhancements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1622,66 +1605,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#supported-formats" class="md-nav__link">
+  <a href="#renaming-columns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Supported Formats
+        Renaming Columns
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#csv-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CSV Files
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="CSV Files">
+    <nav class="md-nav" aria-label="Renaming Columns">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basic-csv-loading" class="md-nav__link">
+  <a href="#withcolumnrenamed" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Basic CSV Loading
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#csv-options" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CSV Options
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#schema-inference" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Schema Inference
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#performance-tips-for-csv" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Performance Tips for CSV
+        withColumnRenamed()
       
     </span>
   </a>
@@ -1694,22 +1633,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parquet-files" class="md-nav__link">
+  <a href="#common-patterns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Parquet Files
+        Common Patterns
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Parquet Files">
+    <nav class="md-nav" aria-label="Common Patterns">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basic-parquet-loading" class="md-nav__link">
+  <a href="#standardizing-column-names" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Basic Parquet Loading
+        Standardizing Column Names
       
     </span>
   </a>
@@ -1717,10 +1656,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#why-parquet" class="md-nav__link">
+  <a href="#preparing-for-joins" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why Parquet?
+        Preparing for Joins
       
     </span>
   </a>
@@ -1728,10 +1667,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#parquet-partitioning" class="md-nav__link">
+  <a href="#making-names-more-descriptive" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Parquet Partitioning
+        Making Names More Descriptive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixing-typos-or-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixing Typos or Case
       
     </span>
   </a>
@@ -1744,22 +1694,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#file-path-patterns" class="md-nav__link">
+  <a href="#integration-with-other-operations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        File Path Patterns
+        Integration with Other Operations
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="File Path Patterns">
+    <nav class="md-nav" aria-label="Integration with Other Operations">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#local-files" class="md-nav__link">
+  <a href="#with-filtering" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Local Files
+        With Filtering
       
     </span>
   </a>
@@ -1767,10 +1717,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#multiple-files-future" class="md-nav__link">
+  <a href="#with-selection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Multiple Files (Future)
+        With Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        With Sorting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        With Aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-joins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        With Joins
       
     </span>
   </a>
@@ -1783,22 +1766,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-sources-best-practices" class="md-nav__link">
+  <a href="#error-handling" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data Sources Best Practices
+        Error Handling
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Data Sources Best Practices">
+    <nav class="md-nav" aria-label="Error Handling">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-choose-the-right-format" class="md-nav__link">
+  <a href="#column-doesnt-exist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Choose the Right Format
+        Column Doesn't Exist
       
     </span>
   </a>
@@ -1806,21 +1789,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-optimize-csv-reading" class="md-nav__link">
+  <a href="#target-name-already-exists" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Optimize CSV Reading
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-leverage-parquet-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Leverage Parquet Features
+        Target Name Already Exists
       
     </span>
   </a>
@@ -1833,60 +1805,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#common-issues" class="md-nav__link">
+  <a href="#performance-tips" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Common Issues
+        Performance Tips
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Common Issues">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#issue-1-file-not-found" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Issue 1: File Not Found
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#issue-2-encoding-problems" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Issue 2: Encoding Problems
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#issue-3-large-file-memory" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Issue 3: Large File Memory
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
+  <a href="#method-summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Next Steps
+        Method Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Aliases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future Enhancements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
       
     </span>
   </a>
@@ -1913,251 +1879,194 @@
   
 
 
-<h1 id="data-loading-guide">Data Loading Guide<a class="headerlink" href="#data-loading-guide" title="Permanent link">&para;</a></h1>
-<p>Learn how to efficiently load data into PyRust DataFrames.</p>
-<h2 id="supported-formats">Supported Formats<a class="headerlink" href="#supported-formats" title="Permanent link">&para;</a></h2>
-<p>PyRust currently supports:
-- <strong>CSV</strong> - Comma-separated values
-- <strong>Parquet</strong> - Columnar format (recommended)</p>
-<h2 id="csv-files">CSV Files<a class="headerlink" href="#csv-files" title="Permanent link">&para;</a></h2>
-<h3 id="basic-csv-loading">Basic CSV Loading<a class="headerlink" href="#basic-csv-loading" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Simple read</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;data.csv&quot;</span><span class="p">)</span>
+<h1 id="column-operations">Column Operations<a class="headerlink" href="#column-operations" title="Permanent link">&para;</a></h1>
+<p>PyRust provides operations for manipulating DataFrame columns, including renaming columns and type casting. This guide covers column-level transformations.</p>
+<h2 id="renaming-columns">Renaming Columns<a class="headerlink" href="#renaming-columns" title="Permanent link">&para;</a></h2>
+<h3 id="withcolumnrenamed">withColumnRenamed()<a class="headerlink" href="#withcolumnrenamed" title="Permanent link">&para;</a></h3>
+<p>Rename a single column in the DataFrame:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Rename a single column</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;old_name&quot;</span><span class="p">,</span> <span class="s2">&quot;new_name&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># With header</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;data.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># With schema inference</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;data.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">infer_schema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Chain multiple renames</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="s2">&quot;column_one&quot;</span><span class="p">)</span> \
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>       <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="s2">&quot;column_two&quot;</span><span class="p">)</span>
 </code></pre></div>
-<h3 id="csv-options">CSV Options<a class="headerlink" href="#csv-options" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>header</code></td>
-<td>bool</td>
-<td><code>True</code></td>
-<td>First row contains column names</td>
-</tr>
-<tr>
-<td><code>infer_schema</code></td>
-<td>bool</td>
-<td><code>True</code></td>
-<td>Automatically detect column types</td>
-</tr>
-</tbody>
-</table>
-<h3 id="schema-inference">Schema Inference<a class="headerlink" href="#schema-inference" title="Permanent link">&para;</a></h3>
-<p>When <code>infer_schema=True</code>, PyRust samples the first 1000 rows to detect types:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;data.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">infer_schema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">df</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Output:</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># root</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">#  |-- name: Utf8</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">#  |-- age: Int64</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">#  |-- salary: Float64</span>
+<p><strong>Alias</strong>: You can also use <code>with_column_renamed()</code> (snake_case) for compatibility.</p>
+<p><strong>Parameters</strong>:
+- <code>existing</code>: Current column name (must exist)
+- <code>new</code>: New name for the column (must not already exist)</p>
+<p><strong>Returns</strong>: A new DataFrame with the column renamed</p>
+<p><strong>Behavior</strong>:
+- All data is preserved
+- Only affects the specified column
+- Other columns remain unchanged
+- Can be chained with other operations</p>
+<p><strong>Examples</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyrust</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;ColumnOps&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># Load data</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;users.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># Make column names more descriptive</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;employee_name&quot;</span><span class="p">)</span> \
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>       <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;employee_age&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># Rename before aggregation</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;location&quot;</span><span class="p">)</span> \
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>           <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">)</span> \
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>           <span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </code></pre></div>
-<p><strong>Inference Rules:</strong>
-- Pure integers → <code>Int64</code>
-- Numbers with decimals → <code>Float64</code>
-- Text → <code>Utf8</code> (string)
-- Dates (future) → <code>Date</code> or <code>Timestamp</code></p>
-<h3 id="performance-tips-for-csv">Performance Tips for CSV<a class="headerlink" href="#performance-tips-for-csv" title="Permanent link">&para;</a></h3>
+<h2 id="common-patterns">Common Patterns<a class="headerlink" href="#common-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="standardizing-column-names">Standardizing Column Names<a class="headerlink" href="#standardizing-column-names" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Convert to standard naming convention</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">standardized</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;FirstName&quot;</span><span class="p">,</span> <span class="s2">&quot;first_name&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>      <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;LastName&quot;</span><span class="p">,</span> <span class="s2">&quot;last_name&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>      <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;EmailAddr&quot;</span><span class="p">,</span> <span class="s2">&quot;email_address&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="preparing-for-joins">Preparing for Joins<a class="headerlink" href="#preparing-for-joins" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Rename columns to avoid conflicts in joins</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">users</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">)</span> \
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>          <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;user_name&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">orders</span> <span class="o">=</span> <span class="n">orders_df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;order_id&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Now join without column name conflicts</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">result</span> <span class="o">=</span> <span class="n">users</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">])</span>
+</code></pre></div>
+<h3 id="making-names-more-descriptive">Making Names More Descriptive<a class="headerlink" href="#making-names-more-descriptive" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Add context to generic names</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">improved</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;purchase_date&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>      <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;amount&quot;</span><span class="p">,</span> <span class="s2">&quot;total_amount&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>      <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="s2">&quot;order_status&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="fixing-typos-or-case">Fixing Typos or Case<a class="headerlink" href="#fixing-typos-or-case" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Fix column name issues</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">fixed</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;adress&quot;</span><span class="p">,</span> <span class="s2">&quot;address&quot;</span><span class="p">)</span>  <span class="c1"># Fix typo</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">fixed</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>        <span class="c1"># Normalize case</span>
+</code></pre></div>
+<h2 id="integration-with-other-operations">Integration with Other Operations<a class="headerlink" href="#integration-with-other-operations" title="Permanent link">&para;</a></h2>
+<h3 id="with-filtering">With Filtering<a class="headerlink" href="#with-filtering" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Rename then filter</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;user_age&quot;</span><span class="p">)</span> \
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>           <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">&quot;user_age &gt; 25&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="with-selection">With Selection<a class="headerlink" href="#with-selection" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Rename then select specific columns</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;full_name&quot;</span><span class="p">)</span> \
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>           <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;full_name&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="with-sorting">With Sorting<a class="headerlink" href="#with-sorting" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Rename then sort</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;salary&quot;</span><span class="p">,</span> <span class="s2">&quot;annual_salary&quot;</span><span class="p">)</span> \
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>           <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">&quot;annual_salary&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="with-aggregation">With Aggregation<a class="headerlink" href="#with-aggregation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Rename before grouping</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;location&quot;</span><span class="p">)</span> \
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>           <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">)</span> \
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>           <span class="o">.</span><span class="n">agg</span><span class="p">((</span><span class="s2">&quot;salary&quot;</span><span class="p">,</span> <span class="s2">&quot;avg&quot;</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="with-joins">With Joins<a class="headerlink" href="#with-joins" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Rename before join to avoid ambiguity</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;user_name&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;product_name&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">result</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1"># Result has both user_name and product_name clearly distinguished</span>
+</code></pre></div>
+<h2 id="error-handling">Error Handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h2>
+<h3 id="column-doesnt-exist">Column Doesn't Exist<a class="headerlink" href="#column-doesnt-exist" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;nonexistent&quot;</span><span class="p">,</span> <span class="s2">&quot;new_name&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Column &#39;nonexistent&#39; does not exist&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="target-name-already-exists">Target Name Already Exists<a class="headerlink" href="#target-name-already-exists" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="c1"># age already exists</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Column &#39;age&#39; already exists&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="performance-tips">Performance Tips<a class="headerlink" href="#performance-tips" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p><strong>Use Schema Inference Carefully</strong>
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Fast: skip inference for known schema</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;data.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">infer_schema</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<p><strong>Chain efficiently</strong>: Multiple renames can be chained together
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Good - single pass through data</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;col_a&quot;</span><span class="p">)</span> \
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;col_b&quot;</span><span class="p">)</span> \
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;col_c&quot;</span><span class="p">)</span>
 </code></pre></div></p>
 </li>
 <li>
-<p><strong>Convert to Parquet</strong>
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Read CSV once</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;large_file.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># TODO: Write to Parquet (not yet implemented)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># df.write.parquet(&quot;large_file.parquet&quot;)</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Future reads will be much faster</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># df = spark.read.parquet(&quot;large_file.parquet&quot;)</span>
+<p><strong>Rename early</strong>: If you only need renamed columns, rename before filtering
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Better - rename affects fewer columns after select</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span> \
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>  <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;full_name&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1"># vs renaming before select</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;full_name&quot;</span><span class="p">)</span> \
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>  <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;full_name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Rename for clarity</strong>: Use descriptive names to make code more readable
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Clear and self-documenting</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;ts&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">)</span> \
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>  <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;qty&quot;</span><span class="p">,</span> <span class="s2">&quot;quantity&quot;</span><span class="p">)</span> \
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>  <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;amt&quot;</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">)</span>
 </code></pre></div></p>
 </li>
 </ol>
-<h2 id="parquet-files">Parquet Files<a class="headerlink" href="#parquet-files" title="Permanent link">&para;</a></h2>
-<h3 id="basic-parquet-loading">Basic Parquet Loading<a class="headerlink" href="#basic-parquet-loading" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Read single file</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;data.parquet&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Read directory of Parquet files</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;data_dir/&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="why-parquet">Why Parquet?<a class="headerlink" href="#why-parquet" title="Permanent link">&para;</a></h3>
-<p><strong>Advantages over CSV:</strong>
-- <strong>10-100x faster</strong> for selective queries
-- <strong>5-10x smaller</strong> file size
-- <strong>Schema preserved</strong> - no inference needed
-- <strong>Columnar format</strong> - only read needed columns
-- <strong>Built-in compression</strong> - automatic
-- <strong>Predicate pushdown</strong> - filters applied during read</p>
-<p><strong>Comparison Example:</strong></p>
+<h2 id="method-summary">Method Summary<a class="headerlink" href="#method-summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Metric</th>
-<th>CSV (1GB)</th>
-<th>Parquet (200MB)</th>
+<th>Method</th>
+<th>Description</th>
+<th>Returns</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>File Size</td>
-<td>1.0 GB</td>
-<td>0.2 GB (5x smaller)</td>
+<td><code>withColumnRenamed(existing, new)</code></td>
+<td>Rename a column</td>
+<td>New DataFrame</td>
 </tr>
 <tr>
-<td>Full Read</td>
-<td>12.5s</td>
-<td>1.2s (10x faster)</td>
-</tr>
-<tr>
-<td>Select 2 cols</td>
-<td>11.8s</td>
-<td>0.3s (39x faster)</td>
-</tr>
-<tr>
-<td>Filter + Select</td>
-<td>8.3s</td>
-<td>0.2s (41x faster)</td>
+<td><code>with_column_renamed(existing, new)</code></td>
+<td>Snake_case alias</td>
+<td>New DataFrame</td>
 </tr>
 </tbody>
 </table>
-<h3 id="parquet-partitioning">Parquet Partitioning<a class="headerlink" href="#parquet-partitioning" title="Permanent link">&para;</a></h3>
-<p>Parquet files can be partitioned for even better performance:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>data_dir/
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  year=2023/
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    month=01/
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>      data.parquet
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    month=02/
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>      data.parquet
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  year=2024/
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    month=01/
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>      data.parquet
+<h2 id="api-aliases">API Aliases<a class="headerlink" href="#api-aliases" title="Permanent link">&para;</a></h2>
+<p>For compatibility, PyRust provides both naming conventions:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;old&quot;</span><span class="p">,</span> <span class="s2">&quot;new&quot;</span><span class="p">)</span>  <span class="c1"># camelCase (PySpark style)</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">df</span><span class="o">.</span><span class="n">with_column_renamed</span><span class="p">(</span><span class="s2">&quot;old&quot;</span><span class="p">,</span> <span class="s2">&quot;new&quot;</span><span class="p">)</span>  <span class="c1"># snake_case (Python style)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Read all partitions</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;data_dir/&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Filter automatically uses partitions</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># Only reads data from 2024</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">df_2024</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">&quot;year == 2024&quot;</span><span class="p">)</span>
+<h2 id="future-enhancements">Future Enhancements<a class="headerlink" href="#future-enhancements" title="Permanent link">&para;</a></h2>
+<p>Future versions will support:
+- <code>withColumn()</code> - Add or replace columns with expressions
+- <code>cast()</code> - Change column data types
+- <code>alias()</code> - Column aliases in select expressions
+- <code>drop()</code> - Remove columns from DataFrame</p>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<p>See the complete examples in <code>examples/column_operations.py</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>python<span class="w"> </span>examples/column_operations.py
 </code></pre></div>
-<h2 id="file-path-patterns">File Path Patterns<a class="headerlink" href="#file-path-patterns" title="Permanent link">&para;</a></h2>
-<h3 id="local-files">Local Files<a class="headerlink" href="#local-files" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Absolute path</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;/home/user/data.csv&quot;</span><span class="p">)</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Relative path</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;./data/input.csv&quot;</span><span class="p">)</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;data.csv&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="multiple-files-future">Multiple Files (Future)<a class="headerlink" href="#multiple-files-future" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Future: Read multiple files</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># df = spark.read.csv(&quot;data/*.csv&quot;)</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># df = spark.read.csv([&quot;file1.csv&quot;, &quot;file2.csv&quot;])</span>
-</code></pre></div>
-<h2 id="data-sources-best-practices">Data Sources Best Practices<a class="headerlink" href="#data-sources-best-practices" title="Permanent link">&para;</a></h2>
-<h3 id="1-choose-the-right-format">1. Choose the Right Format<a class="headerlink" href="#1-choose-the-right-format" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Use Case</th>
-<th>Recommended Format</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Ad-hoc analysis</td>
-<td>CSV (easy to create/view)</td>
-</tr>
-<tr>
-<td>Production pipelines</td>
-<td>Parquet (fast, compressed)</td>
-</tr>
-<tr>
-<td>One-time import</td>
-<td>CSV (then convert to Parquet)</td>
-</tr>
-<tr>
-<td>Archival storage</td>
-<td>Parquet (compressed)</td>
-</tr>
-<tr>
-<td>Human-readable</td>
-<td>CSV</td>
-</tr>
-<tr>
-<td>Machine-only</td>
-<td>Parquet</td>
-</tr>
-</tbody>
-</table>
-<h3 id="2-optimize-csv-reading">2. Optimize CSV Reading<a class="headerlink" href="#2-optimize-csv-reading" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># For large CSVs, consider:</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># 1. Enable schema inference</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;large.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">infer_schema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># 2. Save to Parquet for future use</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1"># df.write.parquet(&quot;large.parquet&quot;)  # TODO</span>
-</code></pre></div>
-<h3 id="3-leverage-parquet-features">3. Leverage Parquet Features<a class="headerlink" href="#3-leverage-parquet-features" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Parquet automatically optimizes these operations:</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># Only reads &#39;name&#39; and &#39;age&#39; columns</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;data.parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">])</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1"># Filter is pushed down to file read</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;data.parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">&quot;age &gt; 18&quot;</span><span class="p">)</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="c1"># Combines both optimizations</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;data.parquet&quot;</span><span class="p">)</span> \
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>       <span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">])</span> \
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>       <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">&quot;age &gt; 18&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="common-issues">Common Issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h2>
-<h3 id="issue-1-file-not-found">Issue 1: File Not Found<a class="headerlink" href="#issue-1-file-not-found" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Error: file doesn&#39;t exist</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;missing.csv&quot;</span><span class="p">)</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># RuntimeError: Failed to read CSV: ...</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># Solution: Check path</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;data.csv&quot;</span><span class="p">))</span>  <span class="c1"># True</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;data.csv&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="issue-2-encoding-problems">Issue 2: Encoding Problems<a class="headerlink" href="#issue-2-encoding-problems" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># CSV with special characters may fail</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1"># Future: add encoding parameter</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># df = spark.read.csv(&quot;data.csv&quot;, encoding=&quot;utf-8&quot;)</span>
-</code></pre></div>
-<h3 id="issue-3-large-file-memory">Issue 3: Large File Memory<a class="headerlink" href="#issue-3-large-file-memory" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># If file is too large, filter early</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;huge.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">subset</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Work with subset first</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">subset</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div>
-<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="../dataframe/">DataFrame Guide</a> - Working with loaded data</li>
-<li><a href="../performance/">Performance Tips</a> - Optimize data loading</li>
-<li><a href="../api/dataframe.md">API Reference</a> - Complete API documentation</li>
-</ul>
+<p>This example demonstrates:
+- Basic column renaming
+- Chaining multiple renames
+- Renaming with filters, joins, and aggregations
+- Error handling
+- Practical use cases</p>
 
 
 
