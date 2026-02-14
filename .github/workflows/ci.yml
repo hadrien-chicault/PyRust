@@ -323,20 +323,20 @@ jobs:
           echo "Release version: $VERSION"
 
       - name: Download all wheel artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           pattern: wheels-*
           path: dist
           merge-multiple: true
 
       - name: Download sdist artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: sdist
           path: dist
 
       - name: Download documentation artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: documentation
           path: docs-build
